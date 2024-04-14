@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="很多次面试都被问到一个问题，你实习中遇到最大的困难是什么？ 我都没有准备，或者再次准备。我说不知道“最大的困难是什么”，或是语焉不详地说解决了某某问题。 窃以为能够完成的任务都不算是最大的困难，我不屑于把某些问题夸大，但是这会导致我被认为“没有技术热情，没有深入思考问题”。过于谦虚会导致一个和素不相识的人真的觉得你是个菜狗。于是稍微撰写总结了一个期望是 Tell a good story 的非虚构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你实习中遇到最大的困难是什么？">
+<meta property="og:url" content="https://m1luf0.github.io/2021/12/22/max-barrier/index.html">
+<meta property="og:site_name" content="m1luf0">
+<meta property="og:description" content="很多次面试都被问到一个问题，你实习中遇到最大的困难是什么？ 我都没有准备，或者再次准备。我说不知道“最大的困难是什么”，或是语焉不详地说解决了某某问题。 窃以为能够完成的任务都不算是最大的困难，我不屑于把某些问题夸大，但是这会导致我被认为“没有技术热情，没有深入思考问题”。过于谦虚会导致一个和素不相识的人真的觉得你是个菜狗。于是稍微撰写总结了一个期望是 Tell a good story 的非虚构">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-22T04:14:21.000Z">
+<meta property="article:modified_time" content="2021-12-22T10:58:59.953Z">
+<meta property="article:author" content="m1luf0">
+<meta property="article:tag" content="Q&amp;A">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>你实习中遇到最大的困难是什么？</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/12/20/goal/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2021/12/22/max-barrier/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2021/12/22/max-barrier/&text=你实习中遇到最大的困难是什么？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2021/12/22/max-barrier/&is_video=false&description=你实习中遇到最大的困难是什么？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=你实习中遇到最大的困难是什么？&body=Check out this article: https://m1luf0.github.io/2021/12/22/max-barrier/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2021/12/22/max-barrier/&name=你实习中遇到最大的困难是什么？&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2021/12/22/max-barrier/&t=你实习中遇到最大的困难是什么？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        你实习中遇到最大的困难是什么？
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">m1luf0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-22T04:14:21.000Z" class="dt-published" itemprop="datePublished">2021-12-22</time>
+        
+        (Updated: <time datetime="2021-12-22T10:58:59.953Z" class="dt-updated" itemprop="dateModified">2021-12-22</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Interview/">Interview</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Q-A/" rel="tag">Q&A</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>很多次面试都被问到一个问题，你实习中遇到最大的困难是什么？</p>
+<p><u>我都没有准备，或者再次准备</u>。我说不知道“最大的困难是什么”，或是语焉不详地说解决了某某问题。</p>
+<p><em>窃以为能够完成的任务都不算是最大的困难，我不屑于把某些问题夸大，但是这会导致我被认为“没有技术热情，没有深入思考问题”。过于谦虚会导致一个和素不相识的人真的觉得你是个菜狗。</em>于是稍微撰写总结了一个期望是 Tell a good story 的非虚构小文，<em>人的记忆是会说谎的，不确定细节是否有出入</em>。</p>
+<p>在某厂实习的时候，接到一个极为紧急的需求。周一开了产品需求组会，任务并没有分配给我，只是先配置好了TRPC-GO的环境。</p>
+<p>周二我没有工作可做，于是我<em>主动地</em> 问 mentor，有没有需求可以给我。这个需求十分地 trivial，也像是给实习生做的。目的是给一线的云服务客服员工提供必要的 API 接口，包括用户 uid，每月CDN、SCDN中流量的使用情况，根据 uid 返回其下所有的加速域名，根据域名查询 uid，统计所有的域名数量等，给了<em>粗劣的请求与返回结果的格式</em>。同时该接口需要使用到天机阁、Prometheus、Grafana、TRPC-GO，便于注意接口的运行情况。在周五之前要上线此 API。</p>
+<p>然而在此之前，我没有使用过这些框架写过项目，战战兢兢地开始完成这个需求。</p>
+<p><em>我给自己列了一个工作列表（Task List）</em>：</p>
+<ol>
+<li>周二、周三下午之前：编写完该需求中提到的接口，功能正确。</li>
+<li>周三下午至周四：接入天机阁和 Prometheus。</li>
+<li>周四晚至周五：提交代码至仓库，通过 Pipeline 检查。</li>
+</ol>
+<p><em>在新学习任意框架时，唯一能可信的参考通常就是官方文档</em>。于是我跟着 Wiki 配置了 config.yml，也搜寻了其他人的文档、码客等网站。但是对于 MySQL 使用的协议，有的文档只写了一笔 trpc，我对此倒还深信不疑。我先尝试写了一个查询 MySQL 中所有记录的简单功能，但显示 MySQL 连接失败。</p>
+<p><em>那么可能有几个问题：</em></p>
+<ol>
+<li>我的 DevCloud 云主机没有权限访问此数据库。（和 mentor 确认完毕）</li>
+<li>配置文件中的用户名、密码、IP、数据库名填写错误。（自行核对完毕）</li>
+<li>配置文件中的协议选择错误。</li>
+</ol>
+<p>因此原因就是 config.yml 文件中的协议应该是 TCP了。【面试官此处应该提问01】</p>
+<p>之后完成接口是比较容易的事情，在此不表。接着就是通过 工蜂 Git 的 Pipeline 等检查了，在仓库里有 Dockerfile 指定环境来测试这个代码能否合并入 master 分支。</p>
+<p>但是发现官方的构建机并没有更新到最新的 tlinux 版本，蓝盾方面的工程师表示暂时不会升级，像 <code>ls</code> 之类的命令都是缺失的。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2021/12/22/max-barrier/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2021/12/22/max-barrier/&text=你实习中遇到最大的困难是什么？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2021/12/22/max-barrier/&is_video=false&description=你实习中遇到最大的困难是什么？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=你实习中遇到最大的困难是什么？&body=Check out this article: https://m1luf0.github.io/2021/12/22/max-barrier/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2021/12/22/max-barrier/&title=你实习中遇到最大的困难是什么？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2021/12/22/max-barrier/&name=你实习中遇到最大的困难是什么？&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2021/12/22/max-barrier/&t=你实习中遇到最大的困难是什么？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2024
+    m1luf0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

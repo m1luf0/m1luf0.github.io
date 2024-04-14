@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="面试[TOC] 4.27 - 11. 指针和引用的区别引用实际上是一个常量指针，它和指针最主要的区别在于初始化的时候指向一个对象，之后不能再指向其他对象，但指向对象的值可以改变。而指针可以定义为空指针。 指针的所占内存的大小由CPU寻址位数决定，引用的大小由指向的对象决定。 指针自增的时候修改了所指向的内存地址，引用自增的时候增加了指向对象的值。 [ 64 位指针 8 bytes, 32 位指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题自我检讨">
+<meta property="og:url" content="https://m1luf0.github.io/2021/04/27/interviewSum/index.html">
+<meta property="og:site_name" content="m1luf0">
+<meta property="og:description" content="面试[TOC] 4.27 - 11. 指针和引用的区别引用实际上是一个常量指针，它和指针最主要的区别在于初始化的时候指向一个对象，之后不能再指向其他对象，但指向对象的值可以改变。而指针可以定义为空指针。 指针的所占内存的大小由CPU寻址位数决定，引用的大小由指向的对象决定。 指针自增的时候修改了所指向的内存地址，引用自增的时候增加了指向对象的值。 [ 64 位指针 8 bytes, 32 位指针">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img.draveness.me/2020-03-10-15838517142219-tcp-closing-connection.png">
+<meta property="og:image" content="https://m1luf0.github.io/home/aliceshair/.config/Typora/typora-user-images/image-20210909125708469.png">
+<meta property="og:image" content="https://m1luf0.github.io/home/aliceshair/.config/Typora/typora-user-images/image-20210909125839532.png">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-8c5fde744a2c13e8760c8b2a36df8bf8_b.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-0f7d1056f7466488a86e59967a03491c_b.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-e5d9e0a5978e74fe5cd2a3fd40bb5cc4_b.jpg">
+<meta property="og:image" content="https://files.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-M5xTVjmK7ax94c8ZQcm%2F-M5xT_hHX2g5ldlyp9nm%2F-M5xTvfTrpmiKxH-F3L9%2Fdocker_arch.png?generation=1588021950800925&alt=media">
+<meta property="og:image" content="https://m1luf0.github.io/home/aliceshair/.config/Typora/typora-user-images/image-20211012194126571.png">
+<meta property="article:published_time" content="2021-04-27T10:54:34.000Z">
+<meta property="article:modified_time" content="2022-03-31T11:42:56.213Z">
+<meta property="article:author" content="m1luf0">
+<meta property="article:tag" content="Q&amp;A">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.draveness.me/2020-03-10-15838517142219-tcp-closing-connection.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>面试题自我检讨</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021/06/21/enjoy-my-life/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/02/20/Bomb%20Lab/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2021/04/27/interviewSum/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2021/04/27/interviewSum/&text=面试题自我检讨"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2021/04/27/interviewSum/&is_video=false&description=面试题自我检讨"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=面试题自我检讨&body=Check out this article: https://m1luf0.github.io/2021/04/27/interviewSum/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2021/04/27/interviewSum/&name=面试题自我检讨&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2021/04/27/interviewSum/&t=面试题自我检讨"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">面试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-27-1"><span class="toc-number">1.1.</span> <span class="toc-text">4.27 - 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 指针和引用的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%A4%E6%96%AD%E4%B8%BB%E6%9C%BA%E6%98%AF%E5%A4%A7%E7%AB%AF%E5%BA%8F%E8%BF%98%E6%98%AF%E5%B0%8F%E7%AB%AF%E5%BA%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 判断主机是大端序还是小端序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AE%A1%E9%81%93%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 管道实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-static-%E5%92%8C-const-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. static 和 const 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-typedef-%E5%92%8C-define-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. typedef 和 define 的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-28-2"><span class="toc-number">1.2.</span> <span class="toc-text">4.28 - 2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-HTTPS-%E4%B8%83%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">6. HTTPS 七次握手，是不是对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-HTTP%E5%92%8CHTTPS%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.2.</span> <span class="toc-text">7. HTTP和HTTPS的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-CA%E8%AF%81%E4%B9%A6%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.2.3.</span> <span class="toc-text">8. CA证书是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%BF%9B%E7%A8%8B%E5%A6%82%E4%BD%95%E7%94%B3%E8%AF%B7%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%EF%BC%88%E6%A0%88%E5%92%8C%E5%A0%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">9. 进程如何申请分配内存（栈和堆的区别）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%9A%E6%80%81%EF%BC%8C%E8%99%9A%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.5.</span> <span class="toc-text">10. 什么是多态，虚函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-29-3"><span class="toc-number">1.3.</span> <span class="toc-text">4.29 - 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E7%A8%8B%E5%BA%8F%EF%BC%8C%E8%BF%9B%E7%A8%8B%EF%BC%8C%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%8D%8F%E7%A8%8B-%E5%A4%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">11. 程序，进程，线程，协程 (多)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Sockets-%E5%8E%9F%E7%90%86%EF%BC%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.2.</span> <span class="toc-text">12. Sockets 原理，过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B%EF%BC%8CTCP-IP%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.3.</span> <span class="toc-text">13. OSI七层模型，TCP&#x2F;IP模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="toc-number">1.3.4.</span> <span class="toc-text">14. 智能指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-TCP%E9%95%BF%E8%BF%9E%E6%8E%A5%EF%BC%8C%E7%9F%AD%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%BF%83%E8%B7%B3%E4%BF%9D%E6%B4%BB"><span class="toc-number">1.3.5.</span> <span class="toc-text">15. TCP长连接，短连接，心跳保活</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-30-4"><span class="toc-number">1.4.</span> <span class="toc-text">4.30 - 4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E8%81%9A%E9%9B%86%E7%B4%A2%E5%BC%95%E5%92%8C%E9%9D%9E%E8%81%9A%E9%9B%86%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.4.1.</span> <span class="toc-text">16. 聚集索引和非聚集索引的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-HTTP-Status-Code"><span class="toc-number">1.4.2.</span> <span class="toc-text">17. HTTP Status Code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-HTTP-1-1-vs-HTTP-2-0-vs-HTTP-3-0"><span class="toc-number">1.4.3.</span> <span class="toc-text">18. HTTP 1.1 vs HTTP 2.0 vs HTTP 3.0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81"><span class="toc-number">1.4.4.</span> <span class="toc-text">19. 乐观锁和悲观锁</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-5"><span class="toc-number">1.5.</span> <span class="toc-text">5.1 - 5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#20-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%85%B6%E4%BC%98%E7%BC%BA%E7%82%B9%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.5.1.</span> <span class="toc-text">20. 进程通信方式及其优缺点、应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E5%8F%8A%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%EF%BC%8C%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5%EF%BC%88%E4%BF%A1%E5%8F%B7%E9%87%8F%E3%80%81%E7%AE%A1%E7%A8%8B%E3%80%81%E9%94%81%EF%BC%89"><span class="toc-number">1.5.2.</span> <span class="toc-text">21. 线程间同步及系统调用，互斥与同步（信号量、管程、锁）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E6%AD%BB%E9%94%81%E5%8E%9F%E5%9B%A0%E3%80%81%E6%A3%80%E6%B5%8B%E3%80%81%E9%A2%84%E9%98%B2%E5%92%8C%E9%81%BF%E5%85%8D"><span class="toc-number">1.5.3.</span> <span class="toc-text">22. 死锁原因、检测、预防和避免</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-epoll-%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%8Cepoll-receive%E8%BF%94%E5%9B%9E%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A4%A7%E5%B0%8F%E5%90%AB%E4%B9%89"><span class="toc-number">1.5.4.</span> <span class="toc-text">23. epoll 的原理，epoll receive返回的数据大小含义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-6"><span class="toc-number">1.6.</span> <span class="toc-text">5.2 - 6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#24-epoll-%E5%92%8C-select-%E5%8C%BA%E5%88%AB%E5%92%8C%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.6.1.</span> <span class="toc-text">24. epoll 和 select 区别和使用场景,</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E5%9B%9B%E7%A7%8D%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB-ACID"><span class="toc-number">1.6.2.</span> <span class="toc-text">25. 数据库事务四种隔离级别 ACID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-%E8%99%9A%E8%A1%A8%E5%92%8C%E8%99%9A%E6%8C%87%E9%92%88%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">1.6.3.</span> <span class="toc-text">26. 虚表和虚指针对性能的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-STL-%E5%AE%B9%E5%99%A8%E7%9A%84%E7%A7%8D%E7%B1%BB%EF%BC%8C%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8C%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6-vector-list-map"><span class="toc-number">1.6.4.</span> <span class="toc-text">27. STL 容器的种类，底层数据结构，增删改查的复杂度(vector, list, map)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-7"><span class="toc-number">1.7.</span> <span class="toc-text">5.3 - 7</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#28-%E5%AE%9E%E4%B9%A0%E9%A1%B9%E7%9B%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">1.7.1.</span> <span class="toc-text">28. 实习项目流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29-SYN-%E6%B4%AA%E6%B3%9B%E6%94%BB%E5%87%BB"><span class="toc-number">1.7.2.</span> <span class="toc-text">29. SYN 洪泛攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#30-GMP-%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-number">1.7.3.</span> <span class="toc-text">30. GMP 调度器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31-Goruntine"><span class="toc-number">1.7.4.</span> <span class="toc-text">31. Goruntine</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-8"><span class="toc-number">1.8.</span> <span class="toc-text">5.4 - 8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#32-bitmap"><span class="toc-number">1.8.1.</span> <span class="toc-text">32. bitmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33-Go-GC"><span class="toc-number">1.8.2.</span> <span class="toc-text">33. Go GC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-Go-defer"><span class="toc-number">1.8.3.</span> <span class="toc-text">34. Go defer</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        面试题自我检讨
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">m1luf0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-27T10:54:34.000Z" class="dt-published" itemprop="datePublished">2021-04-27</time>
+        
+        (Updated: <time datetime="2022-03-31T11:42:56.213Z" class="dt-updated" itemprop="dateModified">2022-03-31</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Interview/">Interview</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Q-A/" rel="tag">Q&A</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h1><p>[TOC]</p>
+<h2 id="4-27-1"><a href="#4-27-1" class="headerlink" title="4.27 - 1"></a>4.27 - 1</h2><h3 id="1-指针和引用的区别"><a href="#1-指针和引用的区别" class="headerlink" title="1. 指针和引用的区别"></a>1. 指针和引用的区别</h3><p>引用实际上是一个常量指针，它和指针最主要的区别在于初始化的时候指向一个对象，之后不能再指向其他对象，但指向对象的值可以改变。而指针可以定义为空指针。</p>
+<p>指针的所占内存的大小由CPU寻址位数决定，引用的大小由指向的对象决定。</p>
+<p>指针自增的时候修改了所指向的内存地址，引用自增的时候增加了指向对象的值。</p>
+<p>[ 64 位指针 8 bytes, 32 位指针 4 bytes, 由此可以推测是多少位的机器。]</p>
+<h3 id="2-判断主机是大端序还是小端序"><a href="#2-判断主机是大端序还是小端序" class="headerlink" title="2. 判断主机是大端序还是小端序"></a>2. 判断主机是大端序还是小端序</h3><p>大端序是高地址存放在内存的低地址，小端序相反。</p>
+<p>可以使用联合体判断。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">union</span> <span class="title class_">T</span> &#123;</span><br><span class="line">    <span class="type">int</span> a;<span class="comment">//4 bytes</span></span><br><span class="line">    <span class="type">char</span> b;<span class="comment">//1 byte</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    T t;</span><br><span class="line">    t.a = <span class="number">0x01020304</span>;</span><br><span class="line">    cout&lt;&lt;t.b&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">if</span>(t.b == <span class="number">0x01</span>) &#123;</span><br><span class="line">    	cout&lt;&lt;<span class="string">&quot;little end&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(t.b == <span class="number">0x04</span>) &#123;</span><br><span class="line">  		cout&lt;&lt;<span class="string">&quot;big end&quot;</span>&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>原理是：联合体共享一处内存，如果对联合体中4字节的一个对象写入十六进制的数字（地址），访问1字节的对象存储的内容就知道内存的低地址存储的是数据的高地址还是低地址，进而推断大小端序。</p>
+<h3 id="3-管道实现原理"><a href="#3-管道实现原理" class="headerlink" title="3. 管道实现原理"></a>3. 管道实现原理</h3><p><span id = "pipe">管道</span>作为进程间通信的方式之一，分为命名管道和匿名管道。底层函数分别为 <code>mkfifo()</code>和 <code>pipe()</code> ，两者的实现原理一样，只是命名管道会创建一个公共的管道文件，供其他进程使用，而匿名管道的文件描述符只有父进程在fork()子进程时，拷贝传递给子进程，其他进程无法使用。</p>
+<p>由一个长度为2的int数组作为管道读写的文件描述符，管道文件存储在内核里，相当于一个缓冲区，没有数据时会发生读阻塞，写操作一般不发生阻塞，类似于半双工通信。</p>
+<p>在 命名管道的具体实现 kfifo 利用了环形缓冲器，使用指针表示内存起始地址，读写和内存末尾偏移量，在保证读线程和写线程没有共享变量的情况下，写入的内容大小永远小于内存分配大小，如果超过就覆盖最早写入的数据，也就是先进先出。</p>
+<h3 id="4-static-和-const-的区别"><a href="#4-static-和-const-的区别" class="headerlink" title="4. static 和 const 的区别"></a>4. static 和 const 的区别</h3><p>存储区域不同。static修饰的变量在静态存储区，const修饰的变量在动态存储区。并且多次初始化static变量，其值不会改变。</p>
+<p>static修饰的变量对于定义作用范围之外的文件是不可见的。const修饰的变量表示不可以被修改，虽然可能被间接修改，但语义是不能修改。</p>
+<p>static修饰的类成员变量和类成员函数是属于类而非该类类型的对象。const修饰的成员函数不能修改成员变量。</p>
+<h3 id="5-typedef-和-define-的区别"><a href="#5-typedef-和-define-的区别" class="headerlink" title="5. typedef 和 define 的区别"></a>5. typedef 和 define 的区别</h3><p>typedef是编译时处理，define在预处理阶段处理。</p>
+<p>typedef只能替换真实存在的类型名，define可以替换各种变量，函数。</p>
+<p>typedef的作用域受限，define作用域于全局。</p>
+<p>在替换指针的时候，如 #define int*  int_ptr， 同时声明两个指针时，会发生错误：int_ptr a,b -&gt; int* a,b。应该是int*a, *b。</p>
+<h2 id="4-28-2"><a href="#4-28-2" class="headerlink" title="4.28 - 2"></a>4.28 - 2</h2><h3 id="6-HTTPS-七次握手，是不是对称加密"><a href="#6-HTTPS-七次握手，是不是对称加密" class="headerlink" title="6. HTTPS 七次握手，是不是对称加密"></a>6. HTTPS 七次握手，是不是对称加密</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">*TCP:</span><br><span class="line">客户端 SYN Seq</span><br><span class="line">服务器 SYN Seq ACK</span><br><span class="line">客户端 ACK</span><br><span class="line">*TLS:</span><br><span class="line">客户端 -&gt; Client Hello : 			 发送加密协议版本，加密压缩算法，随机生成的素数等</span><br><span class="line">		 Server Hello 		    &lt;- 服务器 检查加密协议版本，加密压缩算法，随机生成的素数等</span><br><span class="line">		 </span><br><span class="line">		 Certificate  			&lt;- 服务器 发送证书链，包含发行方，有效期</span><br><span class="line">		 Server Key Exchange	&lt;- 服务器 传递公钥，数字签名等</span><br><span class="line">		 Server Done			&lt;- 服务器 通知 Client 已经发完</span><br><span class="line">		 </span><br><span class="line">客户端 -&gt; Client Key Exchange		 验证证书，传递用 Server 公钥加密的随机字符串</span><br><span class="line">客户端 -&gt; Change Cipher Spec		 通知 Server 之后的消息加密</span><br><span class="line">客户端 -&gt; Finished					 发送加密后的握手信息</span><br><span class="line"></span><br><span class="line">		 Change Cipher Spec 	&lt;- 服务器 通知 Client 之后的消息加密</span><br><span class="line">		 Finished			 	&lt;- 服务器 发送加密后的握手信息</span><br></pre></td></tr></table></figure>
+
+<p>因为只使用了一个密钥进行加密和解密，因此是对称加密的。</p>
+<p>非对称加密有两个钥匙，及公钥（Public Key）和私钥（Private Key）。公钥和私钥是成对的存在，如果对原文使用公钥加密，则只能使用对应的私钥才能解密；因为加密和解密使用的不是同一把密钥，所以这种算法称之为非对称加密算法。</p>
+<h3 id="7-HTTP和HTTPS的区别"><a href="#7-HTTP和HTTPS的区别" class="headerlink" title="7. HTTP和HTTPS的区别"></a>7. HTTP和HTTPS的区别</h3><p>建立连接时，HTTP只需要TCP三次握手，HTTPS还需要多一次TLS四次握手，时延增加。后者保证了消息传输的可靠性。</p>
+<p>HTTP的端口是80，HTTPS端口是443。</p>
+<p>HTTPS需要服务端申请证书。</p>
+<p><img src="https://img.draveness.me/2020-03-10-15838517142219-tcp-closing-connection.png" alt="tcp-closing-connection"></p>
+<h3 id="8-CA证书是什么"><a href="#8-CA证书是什么" class="headerlink" title="8. CA证书是什么"></a>8. CA证书是什么</h3><p>CA证书是包含版本，发行者，过期时间，公钥等信息的二进制或基于其他编码方式的文件，用来验证服务端或客户端是否值得信任。将证书中的数字签名用公钥进行解密，利用同样的哈希算法对证书进行加密，判断两者是否相同。</p>
+<h3 id="9-进程如何申请分配内存（栈和堆的区别）"><a href="#9-进程如何申请分配内存（栈和堆的区别）" class="headerlink" title="9. 进程如何申请分配内存（栈和堆的区别）"></a>9. 进程如何申请分配内存（栈和堆的区别）</h3><p>1、栈区（stack）：由编译器自动分配释放   ，存放函数的参数值，局部变量的值等。其 操作方式类似于数据结构中的栈。    </p>
+<p>2、堆区（heap）：一般由程序员分配释放，   若程序员不释放，程序结束时可能由OS回收   。注意它与数据结构中的堆是两回事，分配方式倒是类似于链表，</p>
+<p>3、全局区（静态区）（static）：全局变量和静态变量的存储是放在一块的，初始化的    全局变量和静态变量在一块区域，   未初始化的全局变量和未初始化的静态变量在相邻的另  一块区域。  程序结束后由系统释放。  </p>
+<p> 静态变量存储在虚拟地址空间的数据段和bss段，c语言中其在代码执行之前初始化，属于编译期初始化，而c++中由于引入了对象，对象生成必须调用构造函数，全局或者局部静态对象当且仅当对象首次用到时进行构造。</p>
+<p> 4、文字常量区：常量字符串就是放在这里的。   程序结束后由系统释放  </p>
+<p>  5、程序代码区：存放函数体的二进制代码。</p>
+<p>进程的内存空间中，由高地址向下，依次是内核代码和数据，内核栈，用户栈，代码库，堆，数据，代码。</p>
+<p>当进程需要用malloc()申请内存时，首先看所需内存大小是否超过128k，如果小于128k，则调用brk()，修改指向堆的指针，使其向高地址移动。如果大于128k，则调用mmap()，在堆和栈之间的虚拟内存中分配一块最接近所需内存大小的内存块。</p>
+<h3 id="10-什么是多态，虚函数"><a href="#10-什么是多态，虚函数" class="headerlink" title="10. 什么是多态，虚函数"></a>10. 什么是多态，虚函数</h3><ul>
+<li>封装：使用函数指针把属性与方法封装到结构体中</li>
+<li>继承：结构体嵌套</li>
+<li>多态：父类与子类方法的函数指针不同</li>
+<li></li>
+</ul>
+<p>多态是在继承的基础上，由于一个类继承了基类的成员函数，当此类需要对继承的函数进行重写时，就发生了多态。这时就引入了虚函数，即在基类需要发生多态的函数前加上virtual。对于每个类有一张虚函数表，对于每个不同的该类对象，它们有一个虚表指针。对于创建时使用了基类指针的对象，在调用虚函数时，通过该对象的虚指针访问虚表查找自己的函数实体。</p>
+<ul>
+<li>构造函数不能是虚函数</li>
+</ul>
+<p>虚函数主要是实现多态，在运行时才可以明确调用对象，根据传入的对象类型来调用函数，例如通过父类的指针或者引用来调用它的时候可以变成调用子类的那个成员函数。而构造函数是在创建对象时自己主动调用的，不可能通过父类的指针或者引用去调用。那使用虚函数也没有实际意义。<br>　　在调用构造函数时还不能确定对象的真实类型（由于子类会调父类的构造函数）；并且构造函数的作用是提供初始化，在对象生命期仅仅运行一次，不是对象的动态行为，没有必要成为虚函数。</p>
+<h2 id="4-29-3"><a href="#4-29-3" class="headerlink" title="4.29 - 3"></a>4.29 - 3</h2><h3 id="11-程序，进程，线程，协程-多"><a href="#11-程序，进程，线程，协程-多" class="headerlink" title="11. 程序，进程，线程，协程 (多)"></a>11. 程序，进程，线程，协程 (多)</h3><p>程序是静态的文件，没有执行的含义。</p>
+<p>当开始运行一个程序的时候，就创建了一个对应的进程。</p>
+<p>进程是资源分配的基本单位，线程是系统调度的基本单位，一个进程可以有多个线程，一个线程里可以有多个协程。同一个进程里的线程共享该进程的内存空间，每个进程拥有独立的内存空间。因为线程切换只需要更新内核栈和寄存器（eip, esp, ebx, ecx, edx, esi, edi, ebp）上下文，进程切换还需要更换页目录得到新的地址空间，所以线程开销小。</p>
+<p>由于线程间的地址空间没有隔离，因此线程崩溃（访问了非法的地址进行操作，写坏其他线程的数据，触发信号（？）会造成进程崩溃。</p>
+<p>协程相当于用户级的线程，是由程序员所写代码开启或退出，线程的管理取决于操作系统的调度算法【先来先服务，最短作业优先，轮转调度，优先级调度，多级队列，多级反馈队列】，可能由于抢占式调度被提前停止。进程和线程都是同步的，协程是异步的，多个协程交替拥有控制权。拥有自己的寄存器上下文和栈，协程调度切换时，将寄存器上下文和栈保存在其他地方，再切回来的时候，回复先前的寄存器上下文和栈。</p>
+<p><strong>线程和goroutine的区别？</strong></p>
+<p><strong>· 内存占用：</strong></p>
+<p>创建一个goroutine的栈内存消耗为2KB，运行后如果栈不够用，会自动扩容。</p>
+<p>创建一个thread为尽量避免极端情况下os线程栈溢出，默认会为其分配一个较大内存（1-8MB），还需要 guard page 的区域用于和其他thread的栈空间进行隔离。且栈内存空间一旦创建和初始化完成后就不能再变化，所以某些特殊情况下还是会有溢出的风险。</p>
+<ul>
+<li><strong>多进程多线程多协程</strong></li>
+</ul>
+<p>当线程数量太小，同一时间大量请求将被阻塞在线程队列中排队等待执行线程，此时 CPU 没有得到充分利用；当线程数量太大，被创建的执行线程同时在争取 CPU 资源，又会导致大量的上下文切换，从而增加线程的执行时间，影响了整体执行效率。</p>
+<ul>
+<li><p><strong>创建线程</strong></p>
+<ul>
+<li>pthread_create（新线程的标识符，属性，新线程将要运行的函数，及参数）</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-Sockets-原理，过程"><a href="#12-Sockets-原理，过程" class="headerlink" title="12. Sockets 原理，过程"></a>12. <span id="socket">Socket</span>s 原理，过程</h3><ul>
+<li><p>socket</p>
+<p>确定协议族（IPv4 IPv6），类型（UDP，TCP）</p>
+<p>返回一个 sockfd</p>
+</li>
+<li><p>bind</p>
+<p>对于服务端来说，需要绑定一个确定的地址，方面让客户端指定连接。</p>
+<p>对于客户端来说，不需要命名socket，而是采用匿名的方式由内核分配。</p>
+</li>
+<li><p>listen （服务端被动）</p>
+<p>传入socket文件描述符，创建一个等待处理连接的监听队列。</p>
+</li>
+<li><p>accept</p>
+<p>传入执行过listen的socket文件描述符，返回一个新的连接 socket </p>
+</li>
+<li><p>connect （客户端主动）</p>
+<p>传入由 socket 系统调用返回的 sockfd，服务器监听的地址，成功建立连接后，sockfd就唯一标识了这个连接。</p>
+</li>
+<li><p>close</p>
+<p>传入 sockfd，并不是调用一次就关闭连接，在多进程程序里，父进程和子进程都执行close才能将连接关闭，每次 fork 都会让父进程的 socket 引用计数加一。</p>
+</li>
+<li><p>recv</p>
+<p>读取 sockfd 上的数据</p>
+</li>
+<li><p>send</p>
+<p>写入数据到 sockfd 上</p>
+</li>
+</ul>
+<h3 id="13-OSI七层模型，TCP-IP模型"><a href="#13-OSI七层模型，TCP-IP模型" class="headerlink" title="13. OSI七层模型，TCP&#x2F;IP模型"></a>13. OSI七层模型，TCP&#x2F;IP模型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">物理层 网卡</span><br><span class="line">数据链路层 MAC ARP 交换机 网卡</span><br><span class="line">网络层 IPv4 IPv6 路由器 ICMP 交换机 RIP</span><br><span class="line">传输层 TCP UDP</span><br><span class="line">会话层 RPC SOCKS</span><br><span class="line">表示层 TLS</span><br><span class="line">应用层 DNS HTTP FTP SMTP</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">应用层</span><br><span class="line">传输层</span><br><span class="line">网络层</span><br><span class="line">链路层</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="14-智能指针"><a href="#14-智能指针" class="headerlink" title="14. 智能指针"></a>14. 智能指针</h3><p>为什么不用裸指针：</p>
+<p>裸指针的声明不能表示它是指向单个对象还是数组；</p>
+<p>销毁时不确定是用 delete 还是其他的销毁机制；</p>
+<p>如果确定了删除的方法，也不知道用删除单个对象的格式还是删除数组的格式；</p>
+<p>如果以上都确定了，但是它不能保证只被销毁一次；</p>
+<p>不能判断对象被销毁，但指针依然指向他们情况。</p>
+<ul>
+<li><code>unique_ptr</code></li>
+</ul>
+<p>表示对对象具有独占控制权，没有拷贝构造函数，而是移动语义。</p>
+<p>任何一个被 unique_ptr 指向的对象只能被一个 unique_ptr 实例管理。</p>
+<ul>
+<li><code>shared_ptr</code></li>
+</ul>
+<p>表示对对象有共享的控制权，当新的 share_ptr 指向同一个对象时，引用计数加一，其他share_ptr离开作用域时，引用计数减一。当引用计数为0的时候，销毁该指针。</p>
+<ul>
+<li><code>weak_ptr</code></li>
+</ul>
+<p>与 shared_ptr 配合使用，没有控制权，也不会导致 shared_ptr 增加引用计数</p>
+<h3 id="15-TCP长连接，短连接，心跳保活"><a href="#15-TCP长连接，短连接，心跳保活" class="headerlink" title="15. TCP长连接，短连接，心跳保活"></a>15. TCP长连接，短连接，心跳保活</h3><p>短连接：一次通信结束，client立即调用close()结束。</p>
+<p>长连接【开关在应用层，参数在操作系统中】：一次通信结束，不立即调用close()。在一定时间内链路上没有数据的传输时，间隔一段时间发送Keep-alive探针，测试当前连接是否可用。如果都探测失败，说明连接不可用。</p>
+<p>客户端和服务端各自都可以开启HeartbeatTask，发送特殊的心跳请求，如果心跳多次没有收到响应，客户端会尝试重连，服务端会close()。</p>
+<ul>
+<li>HTTP 协议的 KeepAlive 意图在于连接复用，同一个连接上串行方式传递请求, 响应数据</li>
+<li>TCP 的 KeepAlive 机制意图在于保活、心跳，检测连接错误。</li>
+</ul>
+<h2 id="4-30-4"><a href="#4-30-4" class="headerlink" title="4.30 - 4"></a>4.30 - 4</h2><h3 id="16-聚集索引和非聚集索引的区别"><a href="#16-聚集索引和非聚集索引的区别" class="headerlink" title="16. 聚集索引和非聚集索引的区别"></a>16. 聚集索引和非聚集索引的区别</h3><p>聚集索引指在表中的数据都会有各自的主键，在B+树存为一个键值。也就是以B+树索引的键值而构建的B+树索引。</p>
+<p>非聚集索引指将主键以外的键值构成为B+树的索引。</p>
+<p>非聚集索引的叶子节点不存储表中的数据，而是存储该列的主键，再根据主键去查找需要的数据。</p>
+<h3 id="17-HTTP-Status-Code"><a href="#17-HTTP-Status-Code" class="headerlink" title="17. HTTP Status Code"></a>17. HTTP Status Code</h3><ul>
+<li>1：临时响应，表示请求已经被接受，客户应该等待服务器采取进一步行动。【HTTP 1.0 没有 1 开头的状态码】<ul>
+<li>100：表示服务器已经接收了请求头，客户端可以继续发送请求主体。</li>
+</ul>
+</li>
+<li>2：服务已经被服务器接受。<ul>
+<li>200：请求成功，返回希望得到的响应头。</li>
+<li>204：成功处理请求，但没有返回任何内容。WiFi登录连接到 Web认证页面。</li>
+<li>206：服务器已经成功处理了部分 GET 请求。</li>
+<li>207：之后的消息是 XML 消息，根据自请求的数量，会包含一系列独立的响应代码。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>3：重定向<ul>
+<li><strong>301：永久重定向。</strong></li>
+<li><strong>302：临时重定向，以后应当以当前请求的地址为准。</strong></li>
+<li>303：临时重定向，重定向到另一个资源，但不是原始地址的替代引用。</li>
+<li>304：请求的资源与已有的版本相同，没有修改。</li>
+</ul>
+</li>
+<li>4：客户端错误<ul>
+<li>400：明显的客户端错误，错误的请求语法，无效的请求。</li>
+<li>401：未认证。表示当前的客户端需要验证 Authorization。</li>
+<li><strong>403：服务器理解，但是拒绝执行，包含了不执行的理由。</strong></li>
+<li>404：请求失败，允许用户的后续请求，但不揭示不执行的理由。</li>
+<li>405：方法不允许。</li>
+</ul>
+</li>
+<li>5：服务器错误<ul>
+<li>500： 服务器无法完成对请求的处理。</li>
+<li>502：从上游服务器接收到的无效响应。</li>
+<li><strong>503：服务器正在停机维护。</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>断点续传</strong>用的哪个状态码：206</p>
+<h3 id="18-HTTP-1-1-vs-HTTP-2-0-vs-HTTP-3-0"><a href="#18-HTTP-1-1-vs-HTTP-2-0-vs-HTTP-3-0" class="headerlink" title="18. HTTP 1.1 vs HTTP 2.0 vs HTTP 3.0"></a>18. HTTP 1.1 vs HTTP 2.0 vs HTTP 3.0</h3><p>HTTP 1.1 采用纯文本格式传输， HTTP 2.0 多了一个二进制帧层。HTTP 1.1 允许在同一条连接上发起多个请求，当多个数据包同时抵达时，由于他们之间无法交互，有可能会发生队头阻塞，如果添加了并行的多个TCP连接，会受到并发连接数量的限制。</p>
+<p>HTTP 2.0 则是建立单个TCP连接，允许客户端为多个数据流划分权重优先级，数据流中由许多二进制帧，根据他们的标签进行重新组织。</p>
+<p>HTTP 1.1 由于资源内联，所以请求 html 的时候一起把 .css 等文件一起接收了，对于多个使用了相同资源的页面，造成重复的资源收发。HTTP 2.0 采用服务器推送的方式，提前告知客户端将要传输的资源，如果客户端拒绝，就可以不必接收重复的文件了。</p>
+<p>HTTP 1.1 头部始终用纯文本格式传输，请求越多，头部越大，造成负担。HTTP 2.0 可以将数据拆分为头部帧和数据帧，利用压缩算法对其进行压缩。</p>
+<p><img src="/home/aliceshair/.config/Typora/typora-user-images/image-20210909125708469.png" alt="image-20210909125708469"></p>
+<p>QUIC 的多路复用和 HTTP2 类似。在一条 QUIC 连接上可以并发发送多个 HTTP 请求 (stream)。但是 QUIC 的多路复用相比 HTTP2 有一个很大的优势。</p>
+<p>QUIC 一个连接上的多个 stream 之间没有依赖。这样假如 stream2 丢了一个 udp packet，也只会影响 stream2 的处理。不会影响 stream2 之前及之后的 stream 的处理。</p>
+<h3 id="19-乐观锁和悲观锁"><a href="#19-乐观锁和悲观锁" class="headerlink" title="19. 乐观锁和悲观锁"></a>19. 乐观锁和悲观锁</h3><p>乐观锁：操作数据时认为数据不会被其他线程更新，不加锁，操作以后通过版本号判断操作是否合法。适合读多写少。</p>
+<p>悲观锁：操作数据时认为数据很可能被其他线程更新，加锁，更新完后释放，但是会造成其他线程阻塞。适合读少写多。</p>
+<h2 id="5-1-5"><a href="#5-1-5" class="headerlink" title="5.1 - 5"></a>5.1 - 5</h2><h3 id="20-进程通信方式及其优缺点、应用场景"><a href="#20-进程通信方式及其优缺点、应用场景" class="headerlink" title="20. 进程通信方式及其优缺点、应用场景"></a>20. 进程通信方式及其优缺点、应用场景</h3><ul>
+<li><p><a href="#pipe">管道原理</a></p>
+<ul>
+<li>优点：容易知道数据是否被读取了</li>
+<li>缺点：数据大小受限。通信效率低，不适合频繁地交换数据，一般是单向，如果要双向必须创建两条管道。匿名管道只能在父子进程间创建，应用范围小。</li>
+<li>应用场景：一个进程的输出作为另一个进程输入的场景。</li>
+</ul>
+<hr>
+<p><strong>System IPC</strong>： </p>
+<p>两个或多个进程间，想要共享内存，他们就要组成一个组，共享的内容在这几个进程的虚拟内存的一个固定区域映射，这时用来签别组的ID号的就是project id。</p>
+</li>
+<li><p><strong>消息队列</strong>：</p>
+<ul>
+<li>底层是链表：用事先约定的 key 唯一标识一个消息队列。IPC_PERM存储权限和进程uid gid，指针 msg_first, msg_last，分别代表队列头和队列尾。</li>
+<li>进程：msgctl()控制, msgget()创建, msgrcv()接收, msgsnd()发送。</li>
+<li>和管道的区别：<ul>
+<li>匿名管道生命周期取决于进程，消息队列生命周期取决于内核。</li>
+<li>命名管道属于文件，消息队列是特定的数据结构。</li>
+<li>管道属于流式存取，消息队列属于块式存取。【类似于 TCP vs UDP】</li>
+</ul>
+</li>
+<li>优点：克服了信号传递信息少，管道缓冲区大小受限的问题</li>
+<li>缺点：通信不及时，MSGMAX限制消息体的大小，不适合较大数据的传输。进程对消息队列读写数据，会发生用户态 copy_to_user 与内核态 copy_from_user 的切换。</li>
+<li>应用场景：二进制块数据，因为每个数据块可以有不同的种类，不像管道一样要先进先出</li>
+</ul>
+</li>
+<li><p><strong>信号量</strong>：在信号量结构中进行 P V 的原子操作，让计数器减一或加一（在0和1之间变化）。 如果某个进程操作以后变为负数，就会阻塞该进程，超过一就会忽略该操作。</p>
+<ul>
+<li>优点：可以保证进程的执行顺序，使得共享资源任意时刻只被一个进程控制，实现了互斥和同步。</li>
+<li>缺点：数量有限，如果使用信号量的进程突然崩溃，可能会导致锁定的信号量无法恢复。</li>
+<li>应用场景：进程间需要同步</li>
+</ul>
+</li>
+<li><p><strong>共享内存：</strong></p>
+<ul>
+<li><ol>
+<li><strong>创建</strong>共享内存段shmget(IPC key, size, shmflg)</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>将进程<strong>附加</strong>到已经创建的共享内存段shm_at(shmid, shmaddr, shmflg)<br>  3. 将进程从已经附加到的共享内存段<strong>分离</strong>shm_dt(shmaddr)<br>  4. <strong>控制</strong>已经附加上的共享内存段shm_ctl(shmid, 命令, 共享内存结构体指针)</li>
+</ol>
+<ul>
+<li>优点：无需多次拷贝数据，提高进程间通信速度（最快）。</li>
+<li>缺点：多个进程同时修改一块内存，可能发生冲突。<ul>
+<li>应用场景：生产者消费者模式</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>信号：</p>
+<ul>
+<li><ol>
+<li><p>发送：进程 kill()传入进程id，信号事件，线程pgkill()传入线程组id，线程id，信号事件。每个进程有一个信号事件等待队列，一个进程内的多个线程会共享该进程的信号事件等待队列，每个线程有自己的信号事件等待队列。</p>
+</li>
+<li><p>阻塞和屏蔽：如果收到多次某个常规信号，内核只会记录一次，如果是 POSIX 引入的多次某个实时信号，内核都会记录。sigprocmask()允许用户设定接收到某个信号的阻塞状态，一个信号被阻塞以后，不会触发该信号对应的处理函数，但是仍然可以添加到信号事件等待队列中。比如解除阻塞以后，可以继续处理在阻塞期间收到的信号。</p>
+</li>
+<li><p>响应和处理：一般发生在内核执行异常、中断、系统调用等返回到用户态的时刻。</p>
+<p>a. 忽略。</p>
+<p>b. 用户处理函数：用户注册的信号处理函数。属于用户态代码，</p>
+<p>c. 内核默认处理函数：用户没有注册处理函数。一般都是杀死或者忽略。</p>
+</li>
+<li><p>可重入性：信号函数允许多个任务并发使用。</p>
+<p><strong>a. 不使用静态数据，或者静态数据只读。</strong></p>
+<p><strong>b. 尽量只使用本地数据。</strong></p>
+<p><strong>c. 全局共享数据使用时必须被保护。（避免死锁）</strong></p>
+<p><strong>d. 不调用不可重入函数。</strong></p>
+</li>
+</ol>
+</li>
+<li><p>优点：虽然信号量也有通知的功能，但需要进程主动查询计数器或者陷入阻塞等待。信号不需要阻塞，就会切换到对应的信号事件处理函数中。（唯一的异步通信方式）</p>
+</li>
+<li><p>缺点：单向通知，信息短。</p>
+</li>
+<li><p>应用场景：</p>
+<ul>
+<li>前台输入特殊终端字符</li>
+<li>系统异常</li>
+<li>系统状态变化</li>
+<li>调用kill函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#socket">套接字</a></p>
+<ul>
+<li>优点：本地套接字使用了和网络套接字同一套接口，既能发送数据报，也能进行字节流的传输。</li>
+<li>缺点：对于每次和客户端建立连接都要建立一个套接字，资源开销大。</li>
+<li>应用场景：跨网络实现进程间通信</li>
+</ul>
+</li>
+</ul>
+<h3 id="21-线程间同步及系统调用，互斥与同步（信号量、管程、锁）"><a href="#21-线程间同步及系统调用，互斥与同步（信号量、管程、锁）" class="headerlink" title="21. 线程间同步及系统调用，互斥与同步（信号量、管程、锁）"></a>21. 线程间同步及系统调用，互斥与同步（信号量、管程、锁）</h3><p>同步：</p>
+<ul>
+<li>POSIX 信号量<ul>
+<li>有别于 System V IPC 信号量。</li>
+<li>信号量函数：<ul>
+<li>sem_init(信号量，信号量类型，信号量初始值)：初始化一个未命名的信号量【不可重复初始化】</li>
+<li>sem_destroy(信号量)：销毁信号量，释放其占有的资源【不可销毁被其他线程等待的信号量】</li>
+<li>sem_wait(信号量)：减一。若为信号量是0，则阻塞。</li>
+<li>sem_trywait(信号量)：非阻塞版本的 sem_wait。若为信号量不是0，则减一。若为信号量是0，则返回-1。</li>
+<li>sem_post(信号量)：加一。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>互斥锁<ul>
+<li>进入关键代码段，获取互斥锁并加锁。离开关键代码段，解锁。用于同步线程对共享数据的访问。</li>
+<li>互斥锁API <ul>
+<li>pthread_mutex_init(mutex, 属性)：初始化</li>
+<li>pthread_mutex_destroy(mutex)：销毁互斥锁，释放其占用的内核资源。【不可销毁一个加锁的互斥锁】</li>
+<li>pthread_mutex_lock(mutex)：原子操作加锁，如果已经加锁，则阻塞，等待其解锁。</li>
+<li>pthread_mutex_trylock(mutex)：非阻塞的加锁操作，如果已经加锁，返回EBUSY。</li>
+<li>pthread_mutex_unlock(mutex)：解锁。如果其他线程正在等待这个互斥锁，这些线程中的某一个会获得它。</li>
+</ul>
+</li>
+<li>属性<ul>
+<li>共享权限</li>
+<li><ol>
+<li>可以被跨进程共享</li>
+<li>只能被和锁初始化线程隶属于同一个进程的线程哥共享。</li>
+</ol>
+</li>
+<li>锁的类型</li>
+<li><ol>
+<li>普通锁：当一个线程已经加锁，其他线程加锁会形成一个等待队列。前一个解锁后，按优先级获得。【重复加锁或解锁】</li>
+<li>检错锁：对已经加锁的检错锁加锁，或者已经解锁的检错锁解锁，返回错误。</li>
+<li>嵌套锁：可以重复加锁，但其他线程获得这个锁之前，要有相应次数地解锁。</li>
+<li>默认锁。上面三者之一。对已经加锁的检错锁加锁，或者已经解锁的检错锁解锁，后果未知</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>条件变量<ul>
+<li>在线程之间同步共享数据的值。共享数据到达某个值，唤醒等待这个共享数据的线程。</li>
+<li>条件变量函数<ul>
+<li>pthread_cond_init 初始化指定属性</li>
+<li>pthread_cond_destroy 销毁条件变量，释放其占用的内核资源。</li>
+<li>pthread_cond_broadcast 以广播的方式唤醒所有等待目标条件变量的线程。如果线程确认是自己被唤醒，则执行，不是则继续等待。</li>
+<li>pthread_cond_signal </li>
+<li>pthread_cond_wait 调用之前mutex已经加锁，调用时把线程放入等待队列，mutex解锁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>读写锁<ul>
+<li>这把锁加了读锁，其他线程写操作都会阻塞</li>
+<li>加了写锁，其他线程的读写操作都会阻塞</li>
+<li>函数<ul>
+<li>pthread_rwlock_wrlock</li>
+<li>pthread_rwlock_rdlock</li>
+<li>pthread_rwlock_unlock</li>
+<li>pthread_rwlock_destroy</li>
+<li>pthread_rwlock_tryrdlock</li>
+<li>pthread_rwlock_trywrlock</li>
+</ul>
+</li>
+<li>场景：读多写少</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-死锁原因、检测、预防和避免"><a href="#22-死锁原因、检测、预防和避免" class="headerlink" title="22. 死锁原因、检测、预防和避免"></a>22. 死锁原因、检测、预防和避免</h3><p>死锁产生的原因：</p>
+<ul>
+<li>互斥访问：一个共享资源同时只能被一个线程持有</li>
+<li>持有并等待：线程持有并等待一些资源</li>
+<li>资源非抢占：资源一旦被持有，其他竞争者都拿不到这个资源</li>
+<li>循环等待：一系列线程等待的关系形成了一个环【关键】</li>
+</ul>
+<p>死锁检测：</p>
+<p>资源分配表和资源等代表检测是否出现了环。</p>
+<p>死锁预防：</p>
+<ul>
+<li>避免互斥访问：设计新的方法保持同时访问共享资源的正确性。（例如设计一个代理线程获取资源）</li>
+<li>不允许持有并等待：可以让线程开始操作之前获取所有的资源，或者线程获取某个资源失败后释放之前持有的资源。（例如活锁，立即返回申请失败）</li>
+<li>允许资源被抢占：要保证被抢占资源的线程正确地恢复。</li>
+<li>循环等待：可以要求线程按照一定地顺序获取资源</li>
+</ul>
+<p>死锁避免：</p>
+<p>任一线程需要获取资源都需要向系统申请，系统根据所处的状态，判断能否分配资源给线程。</p>
+<p>如果系统中存在一个安全序列，按这个序列调度线程执行可以避免资源不足的情况发生，就说明时安全状态。反之是非安全状态。</p>
+<p>具体算法：银行家算法。</p>
+<h3 id="23-epoll-的原理，epoll-receive返回的数据大小含义"><a href="#23-epoll-的原理，epoll-receive返回的数据大小含义" class="headerlink" title="23. epoll 的原理，epoll receive返回的数据大小含义"></a>23. <span id = "epoll">epoll</span> 的原理，epoll receive返回的数据大小含义</h3><ul>
+<li>epoll 把用户关心的文件描述符放在内核的一个事件表里。<ul>
+<li>epoll_create 创建一个额外的文件描述符，来标识内核中的一个事件表。</li>
+<li>epoll_ctl 传入文件描述符，增加修改删除事件表中的内容。【底层红黑树】</li>
+<li>epoll_wait 在一段超时时间内等待一组文件描述符上的事件。如果检测到事件就将所有就绪的事件从内核事件表复制到 events 指向的数组中。</li>
+</ul>
+</li>
+<li>模式<ul>
+<li>LT水平触发：检测到有事件发生并通知应用程序后，应用程序可以不立即处理该事件，等下次调用epoll_wait时，还会再次通知该事件。只要某个socket处于readable&#x2F;writable状态，无论什么时候进行epoll_wait都会返回该socket。</li>
+<li>ET边沿触发：应用程序必须立即处理该事件，后续不会通知。只有某个socket从unreadable变为readable或从unwritable变为writable时，epoll_wait才会返回该socket。【文件描述符也必须非阻塞】</li>
+</ul>
+</li>
+<li>优点：<ul>
+<li>有ET高效模式，适合连接数量多，活动连接少。不需要轮询整个文件描述符集合来检测哪些事件就绪，时间复杂度O（1）</li>
+</ul>
+</li>
+<li>缺点：活动连接频繁，回调函数也被触发得更频繁，效率未必比select高</li>
+</ul>
+<p>recv()含义：如果大小等于要求数据大小，说明缓冲区可能未读完。</p>
+<p>epoll模型，水平触发模式；当socket可写时，会不停的触发socket可写的事件，如何处理？</p>
+<h2 id="5-2-6"><a href="#5-2-6" class="headerlink" title="5.2 - 6"></a>5.2 - 6</h2><h3 id="24-epoll-和-select-区别和使用场景"><a href="#24-epoll-和-select-区别和使用场景" class="headerlink" title="24. epoll 和 select 区别和使用场景,"></a>24. epoll 和 select 区别和使用场景,</h3><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000003063859">图片</a></p>
+<p><a href="#epoll">epoll原理</a></p>
+<p>select原理：</p>
+<p>select(被监听的文件描述符总数，可读、可写、异常事件对应的文件描述符集合，select函数的超时时间)</p>
+<p>成功返回就绪的文件描述符总数，没有就绪的返回0，失败返回-1。</p>
+<p>优点：监控时间精细到微秒，有良好的跨平台可移植性。</p>
+<p>缺点：只能处理可读、可写、异常类型事件，每次调用select集合，由于内核对fd_set在线修改，传入的文件描述符集合也不同。</p>
+<p>使用场景：活动连接数量多。</p>
+<p><strong>同步与异步</strong><br>同步和异步关注的是<strong>消息通信机制</strong> (synchronous communication&#x2F; asynchronous communication)<br>所谓同步，就是在发出一个<em>调用</em>时，在没有得到结果之前，该<em>调用</em>就不返回。但是一旦调用返回，就得到返回值了。<br>换句话说，就是由<em>调用者</em>主动等待这个<em>调用</em>的结果。</p>
+<p>阻塞和非阻塞关注的是<strong>程序在等待调用结果（消息，返回值）时的状态.</strong></p>
+<p>阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。<br>非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程。</p>
+<h3 id="25-数据库事务四种隔离级别-ACID"><a href="#25-数据库事务四种隔离级别-ACID" class="headerlink" title="25. 数据库事务四种隔离级别 ACID"></a>25. 数据库事务四种隔离级别 ACID</h3><ul>
+<li>Atomicity（原子性）：一个事务（transaction）中的所有操作，或者全部完成，或者全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%9B%9E%E6%BB%9A_(%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86)">回滚</a>（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。即，事务不可分割、不可约简。</li>
+<li>Consistency（一致性）：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7">约束</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A7%A6%E5%8F%91%E5%99%A8_(%E6%95%B0%E6%8D%AE%E5%BA%93)">触发器</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%A7%E8%81%94%E5%9B%9E%E6%BB%9A">级联回滚</a>等。</li>
+<li>Isolation（隔离性）：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括未提交读（Read uncommitted）、提交读（read committed）、可重复读（repeatable read）和串行化（Serializable）。</li>
+<li>Durability（持久性）：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/743691">图示</a></p>
+<p>并发出现的问题：</p>
+<ul>
+<li>脏读：读了其他事务修改但是没有提交、发生了回滚的数据</li>
+<li>不可重复读：读了多次其他事务正在修改的的数据，每次读取的结果不同 【UPDATE】</li>
+<li>幻读：读了多次其他事务正在修改的的数据，每次读取的结果不同 【INSERT&#x2F;DELETE】</li>
+</ul>
+<p>四种隔离级别：</p>
+<ul>
+<li>读未提交：读取其他事务修改但是没有提交的数据（可能发生脏读、不可重复读、幻读）</li>
+<li>读已提交：读取其他事务修改且提交的数据（可能发生不可重复读、幻读）</li>
+<li>可重复读：其他事务修改且提交，并且自己也提交，才能读取到修改的事务（MySQL的隔离级别，可能幻读）</li>
+<li>可串行化：除了两个事务都是读操作不会阻塞以外的操作组合都会阻塞。</li>
+</ul>
+<p>隔离级别实现原理：</p>
+<ul>
+<li>每条记录更新的时候都会写入回滚操作日志，一条记录在系统中有多个版本。</li>
+<li>如果当前没有事务用到回滚日志，就删除。</li>
+</ul>
+<h3 id="26-虚表和虚指针对性能的影响"><a href="#26-虚表和虚指针对性能的影响" class="headerlink" title="26. 虚表和虚指针对性能的影响"></a>26. 虚表和虚指针对性能的影响</h3><ul>
+<li>表面开销<ul>
+<li>空间：对于每个包含虚函数的类，都要生成一张虚函数表。对于每个包含虚函数的类的实例，都要创建一个虚指针。</li>
+<li>时间：增加了一次内存寻址，通过虚指针查找虚函数表。</li>
+</ul>
+</li>
+<li>隐藏开销<ul>
+<li>由于需要通过虚指针间接寻址，所以此时 CPU 会发生分支预测，如果预测失败，就要冲刷流水线，重新进行取指，译码的操作。</li>
+</ul>
+</li>
+</ul>
+<h3 id="27-STL-容器的种类，底层数据结构，增删改查的复杂度-vector-list-map"><a href="#27-STL-容器的种类，底层数据结构，增删改查的复杂度-vector-list-map" class="headerlink" title="27. STL 容器的种类，底层数据结构，增删改查的复杂度(vector, list, map)"></a>27. STL 容器的种类，底层数据结构，增删改查的复杂度(vector, list, map)</h3><p><a target="_blank" rel="noopener" href="https://www.huaweicloud.com/articles/cf18183e7d8e260841ba381dd24c98c6.html">博客</a></p>
+<ul>
+<li><p>种类：</p>
+<ul>
+<li>序列式<ul>
+<li><p>vector</p>
+</li>
+<li><p>list</p>
+</li>
+<li><p>queue</p>
+</li>
+<li><p>deque</p>
+<ul>
+<li><p>头部尾部插入删除：O(1)</p>
+<p>中间插入删除：O(N)</p>
+<p>查找：O(N)</p>
+</li>
+</ul>
+</li>
+<li><p>stack</p>
+</li>
+<li><p>heap</p>
+</li>
+<li><p>priority_queue</p>
+</li>
+<li><p>slists</p>
+</li>
+</ul>
+</li>
+<li>关联式<ul>
+<li>map</li>
+<li>hash_table</li>
+<li>tree</li>
+<li>set</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>底层数据结构</p>
+<ul>
+<li><p>vector</p>
+<ul>
+<li><p>头部插入删除：O(N)</p>
+<p>尾部插入删除:O(1)</p>
+<p>中间插入删除：O(N)</p>
+<p>查找：O(N)</p>
+<p>优点：支持随机储存，查询效率高</p>
+<p>缺点：在头部和中间插入删除元素效率低，需要移动内存</p>
+<p>适用场景：适用于元素结构简单，变化小，并且频繁随机访问的场景</p>
+</li>
+</ul>
+</li>
+<li><p>list</p>
+<ul>
+<li><p>任何位置的插入删除：O(1)(假设告诉了你插入删除的位置，不需要你线查找再删除)</p>
+<p>头尾查询：O(1)</p>
+<p>其他位置查询：O（N）</p>
+</li>
+</ul>
+</li>
+<li><p>map</p>
+<ul>
+<li><p>map由红黑树实现，其元素都是键值对，每个元素的键是排序的准则，每个键只能出现一次，不允许重复</p>
+</li>
+<li><p>它提供<em>一对一的hash</em></p>
+<ul>
+<li>第一个可以称为关键字(key)，每个关键字只能在map中出现一次</li>
+<li>第二个可能称为该关键字的值(value)</li>
+</ul>
+<p>map以<strong>模板(泛型)方式实现</strong>，<strong>可以存储任意类型的数据</strong>，包括使用者自定义的数据类型。Map主要用于资料一对一映射(one-to-one)的情況，<strong>map內部的实现自建一颗红黑树，这颗树具有对数据自动排序的功能</strong>。在map内部所有的数据都是有序的，后边我们会见识到有序的好处。比如一个班级中，每个学生的学号跟他的姓名就存在著一对一映射的关系。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>增删改查的复杂度</p>
+<ul>
+<li>增删改查基本是O(log N)</li>
+</ul>
+</li>
+</ul>
+<p>数组</p>
+<p><strong>map vs unordered_map</strong></p>
+<ol>
+<li>map始终保证遍历的时候是按key的大小顺序的，这是一个主要的功能上的差异</li>
+<li>map可以做范围查找，而unordered_map不可以。</li>
+<li>map的iterator除非指向元素被删除，否则永远不会失效。unordered_map的iterator在对unordered_map修改时有时会失效。</li>
+<li>因为3，所以对map的遍历可以和修改map在一定程度上并行（一定程度上的不一致通常可以接受），而对unordered_map的遍历必须防止修改</li>
+<li>map的iterator可以双向遍历，这样可以很容易查找到当前map中刚好大于这个key的值，或者刚好小于这个key的值</li>
+</ol>
+<h2 id="5-3-7"><a href="#5-3-7" class="headerlink" title="5.3 - 7"></a>5.3 - 7</h2><h3 id="28-实习项目流程"><a href="#28-实习项目流程" class="headerlink" title="28. 实习项目流程"></a>28. 实习项目流程</h3><p>从流量中筛选出攻击者流量、关键基础设施的流量，对筛选出的流量做进一步分析,从海量的网络流量中筛选出黑客攻击流量或关基流量，为后续的流量深入分析建立可行的坚实基础。网络流量中完成目标流量筛选，并将目标的标签信息（国家、行业等）通过流量携带出去。网络空间测绘引擎黑客攻击IP威胁情报,从海量的网络流量中筛选出精准的黑客攻击流量，将待分析的流量吞吐下降数个量级，达到最终可分析的目的</p>
+<p><img src="/home/aliceshair/.config/Typora/typora-user-images/image-20210909125839532.png" alt="image-20210909125839532"></p>
+<p>SDN网络控制器实现了控制与转发分离，对网络实现集中控制，必然离不开和网络设备建立连接或者BGP协议簇的邻居关系进行交互，部分场景可能高频次的进行数十万条协议路由的收发、过滤与计算，因此<strong>走较短且简单的路径连接到网络设备</strong>，将直接决定了SDN网络控制器的工作效率与可靠性。</p>
+<p>另一方面，SDN网络控制器是<strong>软件和系统化的产品</strong>，和其他软件产品一样将会面临较频繁的版本迭代、扩缩容、故障处理乃至迁移等运维行为造成的诸多问题，<strong>容器化</strong>是简化运维的有效手段，特别是当容器数量增多时，<strong>k8s容器云平台</strong>是更好的选择。</p>
+<p>SDN网络控制器容器化后通常需要两张网卡eth0&#x2F;eth1在容器内，他们的ip地址分别称为北向地址和南向地址，北向地址用于REST api接口以供上层业务调用，而南向地址用于南向接口与网络设备交互。</p>
+<ul>
+<li><p>基于ASIC：全端口线速转发，低延时，低功耗。  </p>
+</li>
+<li><p>P4可编程模型：协议无关的全流水线可编程架构。吸收了SDN数据平面与控制平面分离的思想，促进了网络协议的发展。其次 P4 让数据平面的可编程性更加灵活，弥补了 OpenFlow 等技术的不可重配置、协议无关、平台无关的缺点。</p>
+</li>
+<li><p>通过与 Tofino 一起供的 Capilano 软件开发环境（SDE）P4 编译器工具 链，用户现在可以编译其 P4 程序，</p>
+</li>
+<li><p>从网络流量中筛选出目标的流量，从可编程交换机的端口发送出去。可支持黑客攻击流量筛选和关基流量筛选。</p>
+</li>
+</ul>
+<p><img src="https://pic1.zhimg.com/v2-8c5fde744a2c13e8760c8b2a36df8bf8_b.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-0f7d1056f7466488a86e59967a03491c_b.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-e5d9e0a5978e74fe5cd2a3fd40bb5cc4_b.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// Client端 </span><br><span class="line">//    int l_times_r = Call(ServerAddr, Multiply, lvalue, rvalue)</span><br><span class="line">1. 将这个调用映射为Call ID。这里假设用最简单的字符串当Call ID的方法</span><br><span class="line">2. 将Call ID，lvalue和rvalue序列化。可以直接将它们的值以二进制形式打包</span><br><span class="line">3. 把2中得到的数据包发送给ServerAddr，这需要使用网络传输层</span><br><span class="line">4. 等待服务器返回结果</span><br><span class="line">5. 如果服务器调用成功，那么就将结果反序列化，并赋给l_times_r</span><br><span class="line"></span><br><span class="line">// Server端</span><br><span class="line">1. 在本地维护一个Call ID到函数指针的映射call_id_map，可以用std::map&lt;std::string, std::function&lt;&gt;&gt;</span><br><span class="line">2. 等待请求</span><br><span class="line">3. 得到一个请求后，将其数据包反序列化，得到Call ID</span><br><span class="line">4. 通过在call_id_map中查找，得到相应的函数指针</span><br><span class="line">5. 将lvalue和rvalue反序列化后，在本地调用Multiply函数，得到结果</span><br><span class="line">6. 将结果序列化后通过网络返回给Client</span><br></pre></td></tr></table></figure>
+
+<p>protobuf，只是对象序列化协议</p>
+<blockquote>
+<p>语言中立，支持多种语言；<br>基于 IDL 文件定义服务，通过 proto3 工具生成指定语言的数据结构、服务端接口以及客户端 Stub；<br>通信协议基于标准的 HTTP&#x2F;2 设计，支持双向流、消息头压缩、单 TCP 的多路复用、服务端推送等特性，这些特性使得 gRPC 在移动端设备上更加省电和节省网络流量；<br>序列化支持 PB（Protocol Buffer）和 JSON，PB 是一种语言无关的高性能序列化框架，基于 HTTP&#x2F;2 + PB, 保障了 RPC 调用的高性能。</p>
+</blockquote>
+<p>REST的约束条件有：</p>
+<ol>
+<li><p>统一接口</p>
+</li>
+<li><p>无状态</p>
+</li>
+<li><p>缓存</p>
+</li>
+<li><p>客户端-服务器</p>
+</li>
+<li><p>分层系统</p>
+</li>
+<li><p>按需代码（可选）</p>
+</li>
+<li><p>CDN 核心的两个模块？</p>
+</li>
+</ol>
+<p>调度，缓存（负载均衡）</p>
+<p>（1）内容库模块 </p>
+<p> 包括源站、内容中心、区域中心等，作为CDN中的核心部分，提供的功能是对内容资源进行一系列的操作，如存储并管理内容资源、将内容分发给下级节点等，并提供内容在CDN中的多副本分布式存储，从而实现系统存储资源、计算资源以及宽带资源的合理利用。 </p>
+<p> （2）流服务缓存模块 </p>
+<p> 作为CDN中直接为用户提供流服务的模块，在面对用户请求时，将先在本地查找用户请求的内容，当本地名优命中是，则将请求转发到上级节点，并一边从内容服务器获取资源，一边对外提供服务。其中，缓存功能分担了内容库的压力，并加速了服务。采用多种开源软件相结合来设计流服务缓存模块。 </p>
+<p> CDN缓存时间会对“回源率”产生直接的影响。若CDN缓存时间较短，CDN边缘节点上的会经常失效，导致频繁回源，增加了源站的负载，同时也增大的访问延时；若CDN缓存时间太长，会带来更新时间慢的问题。开发者需要增对特定的业务，来做特定的缓存时间管理</p>
+<ol start="2">
+<li><p>负载均衡用了什么组件（设备？软件）</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1004723">https://cloud.tencent.com/developer/article/1004723</a></p>
+</li>
+<li><p>有哪几个核心的技术点来实现 Docker ？</p>
+<p>Docker 底层的核心技术包括 Linux 上的命名空间（Namespaces）、控制组（Control groups）、Union 文件系统（Union file systems）和容器格式（Container format）。</p>
+<p>Docker 采用了 C&#x2F;S 架构，包括客户端和服务端。Docker 守护进程 （Daemon）作为服务端接受来自客户端的请求，并处理这些请求（创建、运行、分发容器）。</p>
+<p>客户端和服务端既可以运行在一个机器上，也可通过 socket 或者 RESTful API 来进行通信。</p>
+<p><img src="https://files.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-M5xTVjmK7ax94c8ZQcm%2F-M5xT_hHX2g5ldlyp9nm%2F-M5xTvfTrpmiKxH-F3L9%2Fdocker_arch.png?generation=1588021950800925&alt=media" alt="img"></p>
+<p>Docker 基本架构</p>
+<p>Docker 守护进程一般在宿主主机后台运行，等待接收来自客户端的消息。</p>
+<p>Docker 客户端则为用户提供一系列可执行命令，用户用这些命令实现跟 Docker 守护进程交互。</p>
+</li>
+<li><p>Docker技术演变</p>
+</li>
+<li><p>Docker 和 虚拟机的区别</p>
+</li>
+<li><p>CDN配置中心核心模块，能够做哪些事情</p>
+</li>
+<li><p>channel 关闭了还能读吗，关闭了怎么知道能不能读，能不能继续写，channel实现，channel close的时候会发生什么事情，关闭的时候会发送什么信号，goroutine数量，GMP模型，free()-buffer-cache</p>
+</li>
+<li><p>实习里做的比较难的事情</p>
+</li>
+<li><p>CDN配置秒级下发如何优化</p>
+</li>
+</ol>
+<p><img src="/home/aliceshair/.config/Typora/typora-user-images/image-20211012194126571.png" alt="image-20211012194126571"></p>
+<h3 id="29-SYN-洪泛攻击"><a href="#29-SYN-洪泛攻击" class="headerlink" title="29. SYN 洪泛攻击"></a>29. SYN 洪泛攻击</h3><p><strong>发生</strong>：第二次握手时，服务器发送 SYN ACK 之后就等待客户端的下一次响应，如果客户端不发送 ACK 来完成第三次握手，那么服务器终止半开连接，回收资源，但这过程可能要等待一分钟或以上。如果大量的客户端不完成第三次握手，服务器的连接资源就会被耗尽。</p>
+<p><strong>解决</strong>：使用 SYN cookie。</p>
+<p>​	第二次握手，TCP 使用 SYN 报文段的源和目标 IP 和端口号利用散列函数生成初始 TCP 序列号，发送特殊的初始序列号的 SYNACK 分组。</p>
+<p>​	第三次，如果客户端没有发来 ACK， TCP 就没有分配资源。如果客户端发来ACK，服务端则根据源和目标 IP 和端口号利用散列函数处理，结果加一，如果刚好等于 ACK 的确认字段，说明客户端合法，生成一个具有套接字的全开连接。</p>
+<h3 id="30-GMP-调度器"><a href="#30-GMP-调度器" class="headerlink" title="30. GMP 调度器"></a>30. GMP 调度器</h3><p><strong>GMP</strong></p>
+<p>G：goroutine 的缩写，每次 go func() 都代表一个 G，无限制。使用 struct runtime.g，包含了当前 goroutine 的状态、堆栈、上下文。</p>
+<p>M：工作线程(OS thread)也被称为 Machine，使用 struct runtime.m，所有 M 是有线程栈的。</p>
+<p>P：“Processor”是一个抽象的概念，并不是真正的物理 CPU——逻辑处理器。</p>
+<p>引入一个结构P，它代表M所需的上下文环境，也是处理用户级代码逻辑的处理器。它负责衔接M和G的调度上下文，将等待执行的 G 与 M 对接。当 P 有任务时需要创建或者唤醒一个 M 来执行它队列里的任务。所以 P&#x2F;M 需要进行绑定，构成一个执行单元。</p>
+<p>第四层：Goroutine调度器：每个M对应了一个P，P对应了一个local runnable queue，如果满了可以放到 global runnable queue。每次P想要取出一个G，先看runtext中有没有内容，如果没有就从自身的队列取，如果都为空，则调用findrunable()阻塞地取，最后偷其他P的G。</p>
+<p>第三层：用户空间			  ：M（Machine）</p>
+<p>第二层：内核空间			  ：操作系统调度器</p>
+<p>第一层：硬件					  ：CPU</p>
+<p><strong>Work-stealing</strong></p>
+<p>当一个 P 执行完本地所有的 G 之后，并且全局队列为空的时候，会尝试挑选一个受害者 P，从它的 G 队列中窃取一半的 G。否则会从全局队列中获取(当前个数&#x2F;GOMAXPROCS)个 G。</p>
+<p><strong>Syscall</strong></p>
+<p>调用 syscall 后会解绑 P，然后 M 和 G 进入阻塞，而 P 此时的状态就是 syscall，表明这个 P 的 G 正在 syscall 中，这时的 P 是不能被调度给别的 M 的。如果在短时间内阻塞的 M 就唤醒了，那么 M 会优先来重新获取这个 P，能获取到就继续绑回去，这样有利于数据的局部性。</p>
+<p>P1 和 M 脱离后目前在 idle list 中等待被绑定（处于 syscall 状态）。而 syscall 结束后 M 按照如下规则执行直到满足其中一个条件：</p>
+<p>尝试获取同一个 P(P1)，恢复执行 G</p>
+<p>尝试获取 idle list 中的其他空闲 P，恢复执行 G</p>
+<p>找不到空闲 P，把 G 放回 global queue，M 放回到 idle list</p>
+<h3 id="31-Goruntine"><a href="#31-Goruntine" class="headerlink" title="31. Goruntine"></a>31. Goruntine</h3><h2 id="5-4-8"><a href="#5-4-8" class="headerlink" title="5.4 - 8"></a>5.4 - 8</h2><h3 id="32-bitmap"><a href="#32-bitmap" class="headerlink" title="32. bitmap"></a>32. bitmap</h3><h3 id="33-Go-GC"><a href="#33-Go-GC" class="headerlink" title="33. Go GC"></a>33. Go GC</h3><p>在垃圾收集器开始工作时，程序中不存在任何的黑色对象，垃圾收集的根对象会被标记成灰色，垃圾收集器只会从灰色对象集合中取出对象开始扫描，当灰色集合中不存在任何对象时，标记阶段就会结束。</p>
+<ol>
+<li>清理终止阶段；<ol>
+<li><strong>暂停程序</strong>，所有的处理器在这时会进入安全点（Safe point）；</li>
+<li>如果当前垃圾收集循环是强制触发的，我们还需要处理还未被清理的内存管理单元；</li>
+</ol>
+</li>
+<li>标记阶段；<ol>
+<li>将状态切换至 <code>_GCmark</code>、开启写屏障、用户程序协助（Mutator Assiste）并将根对象入队；</li>
+<li>恢复执行程序，标记进程和用于协助的用户程序会开始并发标记内存中的对象，写屏障会将被覆盖的指针和新指针都标记成灰色，而所有新创建的对象都会被直接标记成黑色；</li>
+<li>开始扫描根对象，包括所有 Goroutine 的栈、全局对象以及不在堆中的运行时数据结构，扫描 Goroutine 栈期间会暂停当前处理器；</li>
+<li>依次处理灰色队列中的对象，将对象标记成黑色并将它们指向的对象标记成灰色；</li>
+<li>使用分布式的终止算法检查剩余的工作，发现标记阶段完成后进入标记终止阶段；</li>
+</ol>
+</li>
+<li>标记终止阶段；<ol>
+<li><strong>暂停程序</strong>、将状态切换至 <code>_GCmarktermination</code> 并关闭辅助标记的用户程序；</li>
+<li>清理处理器上的线程缓存；</li>
+</ol>
+</li>
+<li>清理阶段；<ol>
+<li>将状态切换至 <code>_GCoff</code> 开始清理阶段，初始化清理状态并关闭写屏障；</li>
+<li>恢复用户程序，所有新创建的对象会标记成白色；</li>
+<li>后台并发清理所有的内存管理单元，当 Goroutine 申请新的内存管理单元时就会触发清理；</li>
+</ol>
+</li>
+</ol>
+<h3 id="34-Go-defer"><a href="#34-Go-defer" class="headerlink" title="34. Go defer"></a>34. Go defer</h3><ul>
+<li><p>功能：用于关闭文件描述符、关闭数据库连接以及解锁资源。</p>
+</li>
+<li><p>时间：<code>defer</code> 传入的函数不是在退出代码块的作用域时执行的，它只会在当前函数和方法返回之前被调用。</p>
+</li>
+<li><pre><code class="go">type _defer struct &#123;
+    siz       int32 参数和结果的内存大小
+    started   bool
+    openDefer bool
+    sp        uintptr 栈指针的程序计数器
+    pc        uintptr 调用方的程序计数器
+    fn        *funcval 关键字中传入的函数
+    _panic    *_panic 触发延迟调用的结构体
+    link      *_defer 是否经过开放编码的优化
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[`runtime._defer`](https://draveness.me/golang/tree/runtime._defer) 结构体是延迟调用链表上的一个元素，所有的结构体都会通过 `link` 字段串联成链表。</span><br><span class="line"></span><br><span class="line">因为在编译期间我们已经创建了 [`runtime._defer`](https://draveness.me/golang/tree/runtime._defer) 结构体，所以在运行期间 [`runtime.deferprocStack`](https://draveness.me/golang/tree/runtime.deferprocStack) 只需要设置一些未在编译期间初始化的字段，就可以将栈上的 [`runtime._defer`](https://draveness.me/golang/tree/runtime._defer) 追加到函数的链表上</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 35. git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+创建版本库：		修改和提交：		   查看提交历史：		   	撤销：							分支标签：					远程操作：
+git clone		git status			git log				 git reset --hard HEAD			git branch				git remote -v
+git init		git diff			git log -p &lt;file&gt;	 git checkout HEAD &lt;file&gt;	 	git branch &lt;new-branch&gt; git remote show
+              git add 								 							    git tag					git remote add
+              git mv old new															git tag -d				git fetch
+              git rm																							git pull
+              git commit -m																					git push
+</code></pre>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 5.5 - 9</span><br><span class="line"></span><br><span class="line">###  36. Go 网络模型</span><br><span class="line"></span><br><span class="line">![image-20210507174843102](/home/aliceshair/.config/Typora/typora-user-images/image-20210507174843102.png)</span><br><span class="line"></span><br><span class="line">client 连接 server 的时候，listener 通过 accept 调用接收新 connection。</span><br><span class="line"></span><br><span class="line">每一个新 connection 都启动一个 goroutine 处理。</span><br><span class="line"></span><br><span class="line">accept 调用会把该 connection 的 fd 连带所在的 goroutine上下文信息封装注册到 epoll 的监听列表里去。</span><br><span class="line"></span><br><span class="line">当 goroutine 调用 conn.Read 或者 conn.Write 等需要阻塞等待的函数时，会被 gopark 给封存起来并使之休眠，让 P 去执行本地调度队列里的下一个可执行的 goroutine,往后 Go scheduler 会在循环调度的 runtime.schedule() 函数以及 sysmon 监控线程中调用 runtime.netpoll 以获取可运行的 goroutine 列表并通过调用injectglist 把剩下的 g 放入全局调度队列或者当前 P 本地调度队列去重新执行。</span><br><span class="line"></span><br><span class="line">netpoll 通过使用非阻塞 I/O,避免让操作网络 I/O 的 goroutine 陷入到系统调用从而进入内核态,因为一旦进入内核态,整个程序的控制权就会发生转移(到内核),不再属于用户进程了,那么也就无法借助于 Go 强大的 runtime scheduler 来调度业务程序的并发了。</span><br><span class="line"></span><br><span class="line">而有了 netpoll 之后,借助于非阻塞 I/O ,G 就再也不会因为系统调用的读写而 (长时间) 陷入内核态,当 G 被阻塞在某个 network I/O 操作上时,实际上它不是因为陷入内核态被阻塞住了，而是被 Go runtime 调用 gopark 给 park 住了，此时 G 会被放置到某个 waitqueue 中，而 M 会尝试运行下一个 _Grunnable 的 G,如果此时没有 _Grunnable 的 G 供 M 运行，那么 M 将解绑 P，并进入 sleep 状态。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 37. 访问一个CDN网址，HTTP请求</span><br><span class="line"></span><br><span class="line">假设通过CDN加速的域名为`www.a.com`，接入CDN网络，开始使用加速服务后，当终端用户（北京）发起HTTP请求时，处理流程如下：</span><br><span class="line"></span><br><span class="line">1. 当终端用户（北京）向`www.a.com`下的指定资源发起请求时，首先向本地DNS发起域名解析请求。</span><br><span class="line">2. 本地DNS检查缓存中是否有`www.a.com`的IP地址记录。如果有，则直接返回给终端用户；如果没有，则向授权DNS查询。</span><br><span class="line">3. 当授权DNS解析`www.a.com`时，返回域名CNAME www.a.tbcdn.com对应IP地址。</span><br><span class="line">4. 域名解析请求发送至DNS调度系统，并为请求分配最佳节点IP地址。</span><br><span class="line">5. 本地DNS获取DNS返回的解析IP地址。</span><br><span class="line">6. 用户获取解析IP地址。</span><br><span class="line">7. 用户向获取的IP地址发起对该资源的访问请求。</span><br><span class="line"></span><br><span class="line">- 如果该IP地址对应的节点已缓存该资源，则会将数据直接返回给用户，请求结束。</span><br><span class="line">- 如果该IP地址对应的节点未缓存该资源，则节点向源站发起对该资源的请求。获取资源后，结合用户自定义配置的缓存策略，将资源缓存至节点，例如，图中的北京节点，并返回给用户，请求结束。</span><br><span class="line"></span><br><span class="line">### 38. REST 的指导原则</span><br><span class="line"></span><br><span class="line">1. C/S 端分离。</span><br><span class="line"></span><br><span class="line">   本质：将用户界面和数据存储分开。</span><br><span class="line"></span><br><span class="line">   **优点：**提高用户界面的可移植性，简化服务器组件提高了可伸缩性。</span><br><span class="line"></span><br><span class="line">2. 状态无关。</span><br><span class="line"></span><br><span class="line">   从客户端到服务器的每个请求都必须包含理解该请求所需的所有信息。任何状态管理都在客户端上进行。</span><br><span class="line"></span><br><span class="line">   服务器将不存储有关客户端发出的最新HTTP请求的任何内容。 它将每个请求视为新请求。</span><br><span class="line"></span><br><span class="line">   **优点**：无状态的特征大大提高的服务端的健壮性和可拓展性。</span><br><span class="line"></span><br><span class="line">   **缺点**：造成传输数据的冗余性，但这种确定对于性能和使用来说，几乎是忽略不计的。</span><br><span class="line"></span><br><span class="line">3. 可缓存的。响应中的数据被标记为可缓存或不可缓存。 如果响应是可缓存的，则授予客户端缓存以将响应数据重新用于以后的等效请求的权限。除非明确指出不可能进行缓存，否则所有资源都应允许缓存。</span><br><span class="line"></span><br><span class="line">   **优点：**管理良好的缓存部分减少了一些客户端-服务器的交互，从而进一步提高了可伸缩性和性能。</span><br><span class="line"></span><br><span class="line">4. 系统分层。</span><br><span class="line"></span><br><span class="line">   REST允许使用分层的系统架构，例如，您可以在服务器A上部署API，并在服务器B上存储数据并在服务器C中对请求进行身份验证。 客户端通常无法告知客户端是直接连接到终端服务器还是中间设备。</span><br><span class="line"></span><br><span class="line">   没有分层：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>   @GET<br>   public String myService() {<br>       return “<html><body><div>HELLO</div></body></html>“;<br>   }<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   **优点**：层次清晰，便于分离各个同类层次的功能。</span><br><span class="line"></span><br><span class="line">5. 统一接口。</span><br><span class="line"></span><br><span class="line">   资源应该通过单个URL进行唯一标识，并且只有通过使用网络协议的基础方法（例如带 HTTP 的 DELETE，PUT 和 GET），才有可能操纵资源。</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>   GET &#x2F;orders&#x2F;1 ：返回订单编号为1的订单<br>   POST &#x2F;orders ：增加一个订单<br>   Delete &#x2F;orders&#x2F;1 ：删除一个订单编号为1的订单<br>   PUT &#x2F;orders&#x2F;1 :更新订单编号为1的订单<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">6. 按需编码。</span><br><span class="line"></span><br><span class="line">   大多数时候，将以 XML 或 JSON 的形式发送资源的静态表示。 但是，如果需要可以自由返回可执行代码以支持应用程序的一部分。</span><br><span class="line"></span><br><span class="line">   程序代码在Web服务器上处于非活动状态，直到用户（客户端）使用客户端的Web浏览器请求一个包含指向该代码链接的网页为止。 根据此请求，使用HTTP将网页和程序传输到用户的计算机上。 当页面显示时，代码在浏览器中启动并在用户计算机内部本地执行，直到停止。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 39. BASE理论，CAP理论</span><br><span class="line"></span><br><span class="line">BASE理论是指，Basically Available（基本可用），Soft-state（软状态），Eventual Consistency（最终一致性）。是基于CAP定理演化而来，是对CAP中一致性和可用性权衡的结果。</span><br><span class="line"></span><br><span class="line">核心思想：即使无法做到强一致性，但每个业务根据自身的特点，采用适当的方式来使系统达到最终一致性。</span><br><span class="line"></span><br><span class="line">基本可用</span><br><span class="line">指分布式系统在出现故障的时候，允许损失部分可用性，保证核心可用。但不等价于不可用。</span><br><span class="line"></span><br><span class="line">软状态</span><br><span class="line">软状态是指允许系统存在中间状态，并且该中间状态不会影响系统整体可用性。即允许系统在不同节点间副本同步的时候存在延时。</span><br><span class="line"></span><br><span class="line">最终一致性</span><br><span class="line">系统中的所有数据副本经过一定时间后，最终能够达到一致的状态，不需要实时保证系统数据的强一致性。最终一致性是弱一致性的一种特殊情况。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">一致性（C）</span><br><span class="line">数据在多个副本之间是否能够保持一致的特性。当执行数据更新操作后，仍然可保证数据处于一致的状态。</span><br><span class="line"></span><br><span class="line">可用性（A）</span><br><span class="line">系统提供的服务必须一直处于可用的状态。对于用户的每一个操作情况总是能够在有限的时间内返回结果。这个有限时间是系统设计之初就指定好的系统运行指标。返回的结果指的是系统返回用户的一个正常响应结果，而不是系统错误信息。</span><br><span class="line"></span><br><span class="line">分区容错性（P）</span><br><span class="line">分布式系统在遇到任何网络分区故障的时候，仍然需要能够保证对外提供满足一致性和可用性的服务，除非是整个网络环境都发生了故障。</span><br><span class="line"></span><br><span class="line">### 40.  僵尸进程 孤儿进程</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">当一个进程完成它的工作终止之后，它的父进程需要调用wait()或者waitpid()系统调用取得子进程的终止状态。此时，子进程虽然已经退出了，但是在系统进程表中还为它保留了一些退出状态的信息。</span><br><span class="line"></span><br><span class="line">在进程还未退出之前，它的父进程就已经退出了，一个没有了父进程的子进程就是一个孤儿进程（orphan）。既然所有进程都必须在退出之后被wait()或waitpid()以释放其遗留在系统中的一些资源，。每当出现一个孤儿进程的时候，内核就把孤儿进程的父进程设置为init，而init进程会循环地wait()它的已经退出的子进程。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 5.6 - 10</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 41. 跳表</span><br><span class="line"></span><br><span class="line">要随机插入和删除，以及排序。所以不能使用数组。</span><br><span class="line"></span><br><span class="line">为什么不用红黑树：</span><br><span class="line"></span><br><span class="line">* 性能：在高并发的情况下，属性结构需要执行一些rebalance等可能涉及到整颗树的操作，对于跳表来说只涉及局部。</span><br><span class="line">* 实现：在复杂度和红黑树相同的情况下，跳表实现简单，直观。</span><br><span class="line"></span><br><span class="line">在插入的过程中，跳表中新增的这个结点所在的层数是随机出来的，也不会影响其他结点所在的层数，只需要修改前后的指针，而不需要对多个结点进行调整。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 42. .o .a .so文件的作用</span><br><span class="line"></span><br><span class="line">编译器阶段：</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>C 预处理器<br>语法和语义分析<br>代码生成<br>优化<br>汇编<br>链接载入</p>
+<pre><code>
+.o 称为目标文件，是源代码编译之后产生的二进制代码。
+
+.a 是静态库，这个东西和.o的关系其实很清楚，基本上就是.o打了一个包，把多个.o文件放到一个.a文件里面。所以你标题里的一个问题 .o能不能放进.a？答案是能，而且大家一般就是这样生成.a的。
+
+你编了程序a.out，如果它链接了一个静态库libxx.a那么a.out这个文件里面直接包含了从libxx.a里面来的所有有用的数据。这是静态库的含义，在链接时直接合并到了可执行文件之中。
+
+.so是动态库。动态库则相反，如果你的程序链接了libyy.so，那么libyy.so里面的代码并没有合并到a.out之中，而在a.out真正被执行的时候，加载器才会从你的机器上找到libyy.so，把它加载到你的程序的地址空间里面以便于你能够使用其中的函数。
+
+* 静态链接
+* 动态链接
+
+
+
+
+
+### 43. 重载和覆盖
+
+overload
+
+函数名相同，函数的参数列表不同。
+
+静态编译。
+
+override
+
+函数名相同，函数的参数列表相同。
+
+子类对虚函数继承就是覆盖。属于动态编译。
+
+### 44. 可变参数存放于哪里
+
+可变参数是根据函数的调用约定实现的。
+
+假如我们只考虑整数或者指针，32位的参数都是通过栈来传递，最后一个参数到第一个参数依次入栈，结果通过`eax`传递。64位的参数，前6个通过寄存器传递，剩下的参数通过栈传递，结果通过`rax`传递。
+
+拿 `printf(&quot;%d, %d, %d&quot;, 1, 2, 3);` 举例，通过第一个参数中% 加字母以及分割符形成的字符串，来决定参数列表的数量和类型，然后根据调用约定到对应的位置去访问它的参数。它只能会盲目地接收之后的参数，不会检查。
+
+## 5.7 - 11
+
+### 45. 缓存策略：写回和写穿
+
+1. LRU - Least Recently Used
+   通常用于组相联高速缓存，会有一个age counter（替换index）与每个数组S相关。这个counter最大值就是S，当一个set被访问到，那么比它低的counter就被置为0，其他set自增1。举个例子，有4个set的缓存，原本的counter值是`0-3-2-1`，如果第三个被访问到了，那么counter的值是`1-3-0-2`。
+2. FIFO - First-In First-Out
+   先进先出策略
+3. LFU – Least Frequently Used
+   很高效的算法，但很耗资源，通常不用。
+4. Round-robin
+   有一个指针指向将要被替换的行，当行被替换，指针就会自增1，指针是环形的。
+5. Random
+   随机策略，每个时序Round-robin就要更新，而不是每个替换操作。
+
+**2. 回写策略**
+
+决定怎么把cache的数据写到内存的位置中去
+
+原因：cache速度远大于RAM(主存)。在必要的时候再统一写入主存，从而减少频繁的相对较慢的对主存的写操作，这样明显能加速系统。
+
+- 写回（write back）
+  - 写回是指，仅当一个缓存块需要被替换回内存时，才将其内容写入内存。如果缓存命中，则总是不用更新内存。为了减少内存写操作，缓存块通常还设有一个脏位（dirty bit），用以标识该块在被载入之后是否发生过更新。如果一个缓存块在被置换回内存之前从未被写入过，则可以免去回写操作。CPU只向Cache写入，并用标记加以注明，直到Cache中被写过的块要被进入的信息块取代时，才一次写入主存。
+  - 优点是节省了大量的写操作。这主要是因为，对一个数据块内不同单元的更新仅需一次写操作即可完成。这种内存带宽上的节省进一步降低了能耗，因此颇适用于嵌入式系统。
+- 写通（write through）
+- 即CPU在向Cache写入数据的同时，也把数据写入主存以保证Cache和主存中相应单元数据的一致性。
+- 每当缓存接收到写数据指令，都直接将数据写回到内存。如果此数据地址也在缓存中，则必须同时更新缓存。由于这种设计会引发造成大量写内存操作，有必要设置一个缓冲来减少硬件冲突。这个缓冲称作写缓冲器（Write buffer），通常不超过4个缓存块大小。不过，出于同样的目的，写缓冲器也可以用于写回型缓存。
+  - 特点是简单可靠，但由于CPU每次更新时都要对主存写入，速度必然受影响。
+
+
+
+### 46. 哈希碰撞，对字符串取哈希的方法
+
+
+
+### 47. 线程数量如何定义
+
+最佳线程数目 = （（线程等待时间+线程运行时间）/线程运行时间 ）* CPU数目
+
+&gt; 备注这个公式也是前辈们分享的，当然之前看了淘宝前台系统优化实践的文章，和上面的公式很类似，不过在CPU数目那边，他们更细化了，上面的公式只是参考。不过不管什么公式，最终还是在生产环境中运行后，再优化调整。
+
+对于 CPU 密集型来说，理论上 `线程数量 = CPU 核数（逻辑）` 就可以了，但是实际上，数量一般会设置为 `CPU 核数（逻辑）+ 1`， 计算密（CPU）集型的线程恰好在某时因为发生一个页错误或者因其他原因而暂停，刚好有一个“额外”的线程，可以确保在这种情况下CPU周期不会中断工作。
+
+于 I/O 密集型程序：
+
+&gt; 最佳线程数 = `(1/CPU利用率)` = `1 + (I/O耗时/CPU耗时)`
+
+这是一个CPU核心的最佳线程数，如果多个核心，那么 I/O 密集型程序的最佳线程数就是：
+
+&gt; 最佳线程数 = `CPU核心数` *`(1/CPU利用率)` = `CPU核心数`\*( `1 + (I/O耗时/CPU耗时)`）
+
+
+
+### 48. 为什么要进程池和线程池
+
+* 进程池是由服务器预先创建的一组子进程，这些子进程的数目在3-10个之间（一般情况）；线程池中的线程数量一般和CPU数量差不多。进程池中的所有子进程都运行着相同的代码，并具有相同的属性，比如优先级，PGID等相对于动态创建子进程，现在只需选择一个已经存在的子进程，代价要小的多。
+
+  * 主进程使用某种算法主动选择子进程。最简单常用的算法是随机算法和轮流选取（Round-Robin)算法
+
+  * 主进程和所有子进程通过一个共享的工作队列来同步，子进程在该队列上都是睡眠态。当有新的任务到来时，主进程将任务添加到工作队列中。这将唤醒正在等待任务的子进程。
+
+    不过只有一个子进程获得新任务的“接管权”，它可以从工作队列中取出并执行它，而其他子进程将继续睡眠在工作队列上。
+
+    当选择好子进程后，主进程还需要使用某种通知机制来告诉目标子进程有新进程需要处理，并传递必要的数据。
+
+    最简单的方法是，在父进程和子进程之间预先建立好一条管道，然后通过该管道来实现所有进程间通信
+
+* 创建线程/进程
+
+线程只不过是共享虚拟地址空间和文件描述符表的进程而已。由某一进程产生的线程是该主线程（父进程）的子进程。
+
+## 5.8 - 12
+
+### 49. auto展开推断原理
+
+
+
+
+
+### 50. Docker 和虚拟机的区别
+
+![preview](https://pic2.zhimg.com/v2-c2a31e2008835b2974170ad1dbac0d42_r.jpg?source=1940ef5c)
+
+
+
+## 8.28 - 13
+
+### 51. InnoDB与MyISAM的区别
+
+1. InnoDB 支持事务，MyISAM 不支持事务
+2. InnoDB 支持外键，而 MyISAM 不支持
+3. InnoDB 是聚簇索引，MyISAM 是非聚簇索引。聚簇索引的文件存放在主键索引的叶子节点上，因此 InnoDB必须要有主键，通过主键索引效率很高。
+4. InnoDB 最小的锁粒度是行锁，MyISAM最小的锁粒度是表锁。一个更新语句会锁住整张表，导致其他查询和更新都会被阻塞
+5. InnoDB 不保存表的具体行数，而MyISAM会保存，所以MyISAM在执行`select count(*)`更快
+
+
+
+### 52. 自己实现一个 vector
+
+
+
+### 53. 零拷贝
+
+零拷贝的步骤为：
+
+1）DMA将数据拷贝到DMA引擎的内核缓冲区中；
+
+2）将数据的位置和长度的信息的描述符加到套接字缓冲区；
+
+3）DMA引擎直接将数据从内核缓冲区传递到协议引擎；
+
+可以看出，零拷贝并非真正的没有拷贝，还是有2次内核缓冲区的DMA拷贝，只是消除了内核缓冲区和用户缓冲区之间的CPU拷贝。Linux中主要的零拷贝函数有sendfile、splice、tee等。
+
+
+
+### 54. Linux 线程调度策略
+
+**linux内核的三种 调度策略 ：** 
+
+- SCHED_OTHER 分时调度策略，（默认的）
+- SCHED_FIFO实时调度策略，先到先服务
+- SCHED_RR实时调度策略，时间片轮转 
+
+
+
+## 8.29 - 14
+
+
+
+### 55. 常用TCP UDP端口，区别
+
+Telnet(远程登录)、FTP(文件传输协议)、SMTP(简单邮件传输协议)。//TCP
+
+NFS(网络文件系统)、SNMP(简单网络管理系统)、DNS(主域名称系统)、TFTP(通用文件传输协议) 
+
+端口：21 FTP
+端口：22 SSH
+
+端口：23 Telnet
+
+端口：25 SMTP
+端口：53 Domain Name Server（DNS）
+
+
+
+- 连接
+  - TCP是面向连接的传输层协议，即传输数据之前必须先建立好连接。
+  - UDP无连接。
+- 服务对象
+  - TCP是点对点的两点间服务，即一条TCP连接只能有两个端点
+  - UDP支持一对一，一对多，多对一，多对多的交互通信。
+- 可靠性
+  - TCP是可靠交付：无差错，不丢失，不重复，按序到达。
+  - UDP是尽最大努力交付，不保证可靠交付。
+- 拥塞控制，流量控制
+  - TCP有拥塞控制和流量控制保证数据传输的安全性。
+  - UDP没有拥塞控制，网络拥塞不会影响源主机的发送效率。
+- 报文长度
+  - TCP是动态报文长度，即TCP报文长度是根据接收方的窗口大小和当前网络拥塞情况决定的，流式传输
+  - UDP面向报文，不合并，不拆分，保留上面（应用层）传下来报文的边界，直接传输报文。
+- 首部开销
+  - TCP首部开销大，首部20个字节。
+  - UDP首部开销小，8字节。（源端口，目的端口，UDP数据报长度，检验和，每个字段两个字节）
+
+### 
+
+### 56. 十大排序
+
+https://sort.hust.cc/
+
+![image-20210909125413111](/home/aliceshair/.config/Typora/typora-user-images/image-20210909125413111.png)
+
+
+
+### 57. 拥塞控制
+
+
+
+
+
+### 58. B树和 B+树区别
+
+B+树有一个最大的好处，方便扫库，B树必须用中序遍历的方法按序扫库，而B+树直接从叶子结点挨个扫一遍就完了。
+
+**B+树支持range-query(区间查询)非常方便，而B树不支持**。这是数据库选用B+树的最主要原因。
+
+比如要查 5-10之间的，B+树一把到5这个标记，再一把到10，然后串起来就行了，B树就非常麻烦。B树的好处，就是成功查询特别有利，因为树的高度总体要比B+树矮。不成功的情况下，B树也比B+树稍稍占一点点便宜。
+
+B树的优势是当你要查找的值恰好处在一个非叶子节点时，查找到该节点就会成功并结束查询，而B+树由于非叶节点只是索引部分，这些节点中只含有其子树中的最大(或最小)关键字，当非终端节点上的关键字等于给点值时，查找并不终止，而是继续向下直到叶子节点。因此在B+树中，无论查找成功与否，都是走了一条从根到叶子节点的路径。
+
+有很多基于频率的搜索是选用B树，越频繁query的结点越往根上走，前提是需要对query做统计，而且要对key做一些变化。
+另外B树也好B+树也好，根或者上面几层因为被反复query，所以这几块基本都在内存中，不会出现读磁盘IO，一般已启动的时候，就会主动换入内存。 mysql底层存储是用B+树实现的，因为内存中B+树是没有优势的，但是一到磁盘，B+树的威力就出来了。
+
+
+
+#### 3.21 
+
+#### 59. 系统调用
+
+1. **应用程序** 代码调用系统调用( xyz )，该函数是一个包装系统调用的 **库函数** ；
+2. **库函数** ( xyz )负责准备向内核传递的参数，并触发 **软中断** 以切换到内核；
+3. CPU 被 **软中断** 打断后，执行 **中断处理函数** ，即 **系统调用处理函数** ( system_call )；
+4. **系统调用处理函数** 调用 **系统调用服务例程** ( sys_xyz )，真正开始处理该系统调用；
+
+
+
+ **执行态切换** 过程如下：
+
+1. **应用程序** 在 **用户态** 准备好调用参数，执行 int 指令触发 **软中断** ，中断号为 0x80 ；
+2. CPU 被软中断打断后，执行对应的 **中断处理函数** ，这时便已进入 **内核态** ；
+3. **系统调用处理函数** 准备 **内核执行栈** ，并保存所有 **寄存器** (一般用汇编语言实现)；
+4. **系统调用处理函数** 根据 **系统调用号** 调用对应的 C 函数—— **系统调用服务例程** ；
+5. **系统调用处理函数** 准备 **返回值** 并从 **内核栈** 中恢复 **寄存器** ；
+6. **系统调用处理函数** 执行 ret 指令切换回 **用户态** ；
+</code></pre>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">面试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-27-1"><span class="toc-number">1.1.</span> <span class="toc-text">4.27 - 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 指针和引用的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%A4%E6%96%AD%E4%B8%BB%E6%9C%BA%E6%98%AF%E5%A4%A7%E7%AB%AF%E5%BA%8F%E8%BF%98%E6%98%AF%E5%B0%8F%E7%AB%AF%E5%BA%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 判断主机是大端序还是小端序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AE%A1%E9%81%93%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 管道实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-static-%E5%92%8C-const-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. static 和 const 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-typedef-%E5%92%8C-define-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. typedef 和 define 的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-28-2"><span class="toc-number">1.2.</span> <span class="toc-text">4.28 - 2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-HTTPS-%E4%B8%83%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">6. HTTPS 七次握手，是不是对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-HTTP%E5%92%8CHTTPS%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.2.</span> <span class="toc-text">7. HTTP和HTTPS的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-CA%E8%AF%81%E4%B9%A6%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.2.3.</span> <span class="toc-text">8. CA证书是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%BF%9B%E7%A8%8B%E5%A6%82%E4%BD%95%E7%94%B3%E8%AF%B7%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%EF%BC%88%E6%A0%88%E5%92%8C%E5%A0%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">9. 进程如何申请分配内存（栈和堆的区别）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%9A%E6%80%81%EF%BC%8C%E8%99%9A%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.5.</span> <span class="toc-text">10. 什么是多态，虚函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-29-3"><span class="toc-number">1.3.</span> <span class="toc-text">4.29 - 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E7%A8%8B%E5%BA%8F%EF%BC%8C%E8%BF%9B%E7%A8%8B%EF%BC%8C%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%8D%8F%E7%A8%8B-%E5%A4%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">11. 程序，进程，线程，协程 (多)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Sockets-%E5%8E%9F%E7%90%86%EF%BC%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.2.</span> <span class="toc-text">12. Sockets 原理，过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B%EF%BC%8CTCP-IP%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.3.</span> <span class="toc-text">13. OSI七层模型，TCP&#x2F;IP模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="toc-number">1.3.4.</span> <span class="toc-text">14. 智能指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-TCP%E9%95%BF%E8%BF%9E%E6%8E%A5%EF%BC%8C%E7%9F%AD%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%BF%83%E8%B7%B3%E4%BF%9D%E6%B4%BB"><span class="toc-number">1.3.5.</span> <span class="toc-text">15. TCP长连接，短连接，心跳保活</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-30-4"><span class="toc-number">1.4.</span> <span class="toc-text">4.30 - 4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E8%81%9A%E9%9B%86%E7%B4%A2%E5%BC%95%E5%92%8C%E9%9D%9E%E8%81%9A%E9%9B%86%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.4.1.</span> <span class="toc-text">16. 聚集索引和非聚集索引的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-HTTP-Status-Code"><span class="toc-number">1.4.2.</span> <span class="toc-text">17. HTTP Status Code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-HTTP-1-1-vs-HTTP-2-0-vs-HTTP-3-0"><span class="toc-number">1.4.3.</span> <span class="toc-text">18. HTTP 1.1 vs HTTP 2.0 vs HTTP 3.0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81"><span class="toc-number">1.4.4.</span> <span class="toc-text">19. 乐观锁和悲观锁</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-5"><span class="toc-number">1.5.</span> <span class="toc-text">5.1 - 5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#20-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%85%B6%E4%BC%98%E7%BC%BA%E7%82%B9%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.5.1.</span> <span class="toc-text">20. 进程通信方式及其优缺点、应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E5%8F%8A%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%EF%BC%8C%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5%EF%BC%88%E4%BF%A1%E5%8F%B7%E9%87%8F%E3%80%81%E7%AE%A1%E7%A8%8B%E3%80%81%E9%94%81%EF%BC%89"><span class="toc-number">1.5.2.</span> <span class="toc-text">21. 线程间同步及系统调用，互斥与同步（信号量、管程、锁）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E6%AD%BB%E9%94%81%E5%8E%9F%E5%9B%A0%E3%80%81%E6%A3%80%E6%B5%8B%E3%80%81%E9%A2%84%E9%98%B2%E5%92%8C%E9%81%BF%E5%85%8D"><span class="toc-number">1.5.3.</span> <span class="toc-text">22. 死锁原因、检测、预防和避免</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-epoll-%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%8Cepoll-receive%E8%BF%94%E5%9B%9E%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A4%A7%E5%B0%8F%E5%90%AB%E4%B9%89"><span class="toc-number">1.5.4.</span> <span class="toc-text">23. epoll 的原理，epoll receive返回的数据大小含义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-6"><span class="toc-number">1.6.</span> <span class="toc-text">5.2 - 6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#24-epoll-%E5%92%8C-select-%E5%8C%BA%E5%88%AB%E5%92%8C%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.6.1.</span> <span class="toc-text">24. epoll 和 select 区别和使用场景,</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E5%9B%9B%E7%A7%8D%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB-ACID"><span class="toc-number">1.6.2.</span> <span class="toc-text">25. 数据库事务四种隔离级别 ACID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-%E8%99%9A%E8%A1%A8%E5%92%8C%E8%99%9A%E6%8C%87%E9%92%88%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">1.6.3.</span> <span class="toc-text">26. 虚表和虚指针对性能的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-STL-%E5%AE%B9%E5%99%A8%E7%9A%84%E7%A7%8D%E7%B1%BB%EF%BC%8C%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8C%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6-vector-list-map"><span class="toc-number">1.6.4.</span> <span class="toc-text">27. STL 容器的种类，底层数据结构，增删改查的复杂度(vector, list, map)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-7"><span class="toc-number">1.7.</span> <span class="toc-text">5.3 - 7</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#28-%E5%AE%9E%E4%B9%A0%E9%A1%B9%E7%9B%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">1.7.1.</span> <span class="toc-text">28. 实习项目流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29-SYN-%E6%B4%AA%E6%B3%9B%E6%94%BB%E5%87%BB"><span class="toc-number">1.7.2.</span> <span class="toc-text">29. SYN 洪泛攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#30-GMP-%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-number">1.7.3.</span> <span class="toc-text">30. GMP 调度器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31-Goruntine"><span class="toc-number">1.7.4.</span> <span class="toc-text">31. Goruntine</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-8"><span class="toc-number">1.8.</span> <span class="toc-text">5.4 - 8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#32-bitmap"><span class="toc-number">1.8.1.</span> <span class="toc-text">32. bitmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33-Go-GC"><span class="toc-number">1.8.2.</span> <span class="toc-text">33. Go GC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-Go-defer"><span class="toc-number">1.8.3.</span> <span class="toc-text">34. Go defer</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2021/04/27/interviewSum/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2021/04/27/interviewSum/&text=面试题自我检讨"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2021/04/27/interviewSum/&is_video=false&description=面试题自我检讨"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=面试题自我检讨&body=Check out this article: https://m1luf0.github.io/2021/04/27/interviewSum/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2021/04/27/interviewSum/&title=面试题自我检讨"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2021/04/27/interviewSum/&name=面试题自我检讨&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2021/04/27/interviewSum/&t=面试题自我检讨"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2024
+    m1luf0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

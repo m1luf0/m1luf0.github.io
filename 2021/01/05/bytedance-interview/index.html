@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1. 自我介绍顺带提了项目，面试官反问为什么用SQLite不用别的数据库 2. HTTP和HTTPS的区别 端口不同：HTTP使用的是80端口，HTTPS使用443端口； HTTP（超文本传输协议）信息是明文传输，HTTPS运行在SSL(Secure Socket Layer)之上，添加了加密和认证机制，更加安全；（我只答了这个） HTTPS由于加密解密会带来更大的CPU和内存开销； HTTPS通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面经-后台开发实习生-番茄小说部门">
+<meta property="og:url" content="https://m1luf0.github.io/2021/01/05/bytedance-interview/index.html">
+<meta property="og:site_name" content="m1luf0">
+<meta property="og:description" content="1. 自我介绍顺带提了项目，面试官反问为什么用SQLite不用别的数据库 2. HTTP和HTTPS的区别 端口不同：HTTP使用的是80端口，HTTPS使用443端口； HTTP（超文本传输协议）信息是明文传输，HTTPS运行在SSL(Secure Socket Layer)之上，添加了加密和认证机制，更加安全；（我只答了这个） HTTPS由于加密解密会带来更大的CPU和内存开销； HTTPS通">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-05T10:54:34.000Z">
+<meta property="article:modified_time" content="2021-12-18T12:23:33.616Z">
+<meta property="article:author" content="m1luf0">
+<meta property="article:tag" content="Q&amp;A">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>面经-后台开发实习生-番茄小说部门</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021/01/06/gold-mountain-interview/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2020/12/23/kuaishou-interview/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2021/01/05/bytedance-interview/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&text=面经-后台开发实习生-番茄小说部门"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&is_video=false&description=面经-后台开发实习生-番茄小说部门"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=面经-后台开发实习生-番茄小说部门&body=Check out this article: https://m1luf0.github.io/2021/01/05/bytedance-interview/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&name=面经-后台开发实习生-番茄小说部门&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2021/01/05/bytedance-interview/&t=面经-后台开发实习生-番茄小说部门"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">1. 自我介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-HTTP%E5%92%8CHTTPS%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">2. HTTP和HTTPS的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="toc-number">3.</span> <span class="toc-text">3. 一个完整的网络请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-HTTP-DNS%E5%B1%9E%E4%BA%8E%E5%93%AA%E4%B8%80%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text">4. HTTP DNS属于哪一层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-TCP%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5%E5%8F%8A%E5%8E%9F%E5%9B%A0"><span class="toc-number">5.</span> <span class="toc-text">5. TCP三握四挥及原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%BB%BA%E7%AB%8B%E4%BA%86%E4%B8%80%E6%AC%A1HTTP%E8%BF%9E%E6%8E%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%AF%8F%E6%AC%A1%E8%BF%98%E8%A6%81%E5%86%8DTCP%E8%BF%9E%E6%8E%A5%E4%B9%88%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">6. 建立了一次HTTP连接以后，每次还要再TCP连接么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-cookie-session-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">7.</span> <span class="toc-text">7. cookie session 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E7%BA%BF%E7%A8%8B%E3%80%81%E8%BF%9B%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">8.</span> <span class="toc-text">8. 线程、进程是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="toc-number">9.</span> <span class="toc-text">9. 进程间通信方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E7%BA%BF%E7%A8%8B%E5%B4%A9%E6%BA%83%E6%98%AF%E5%90%A6%E4%BC%9A%E9%80%A0%E6%88%90%E8%BF%9B%E7%A8%8B%E5%B4%A9%E6%BA%83%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">10. 线程崩溃是否会造成进程崩溃？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-hashmap%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-number">11.</span> <span class="toc-text">11. hashmap底层实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="toc-number">12.</span> <span class="toc-text">12. 什么是哈希碰撞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%BF%E5%85%8DHash%E7%A2%B0%E6%92%9E%E7%AD%96%E7%95%A5"><span class="toc-number">12.1.</span> <span class="toc-text">避免Hash碰撞策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%BC%80%E6%94%BE%E5%9C%B0%E5%9D%80%E6%B3%95-%E5%86%8D%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">12.1.1.</span> <span class="toc-text">1.开放地址法(再散列法)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%86%8D%E5%93%88%E5%B8%8C%E6%B3%95Rehash"><span class="toc-number">12.1.2.</span> <span class="toc-text">2.再哈希法Rehash</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E9%93%BE%E5%9C%B0%E5%9D%80%E6%B3%95%EF%BC%88%E6%8B%89%E9%93%BE%E6%B3%95%EF%BC%89"><span class="toc-number">12.1.3.</span> <span class="toc-text">3.链地址法（拉链法）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-hashmap%E4%BD%95%E6%97%B6%E6%89%A9%E5%AE%B9%E5%8F%8A%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">13.</span> <span class="toc-text">13. hashmap何时扩容及时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E7%AE%97%E6%B3%95%E9%A2%98%EF%BC%9A%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4"><span class="toc-number">14.</span> <span class="toc-text">14. 算法题：合并区间</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        面经-后台开发实习生-番茄小说部门
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">m1luf0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-05T10:54:34.000Z" class="dt-published" itemprop="datePublished">2021-01-05</time>
+        
+        (Updated: <time datetime="2021-12-18T12:23:33.616Z" class="dt-updated" itemprop="dateModified">2021-12-18</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Interview/">Interview</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Q-A/" rel="tag">Q&A</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="1-自我介绍"><a href="#1-自我介绍" class="headerlink" title="1. 自我介绍"></a>1. 自我介绍</h3><p>顺带提了项目，面试官反问为什么用SQLite不用别的数据库</p>
+<h3 id="2-HTTP和HTTPS的区别"><a href="#2-HTTP和HTTPS的区别" class="headerlink" title="2. HTTP和HTTPS的区别"></a>2. HTTP和HTTPS的区别</h3><ol>
+<li>端口不同：HTTP使用的是80端口，HTTPS使用443端口；</li>
+<li><strong>HTTP（超文本传输协议）信息是明文传输，HTTPS运行在SSL(Secure Socket Layer)之上，添加了加密和认证机制，更加安全；</strong>（我只答了这个）</li>
+<li>HTTPS由于加密解密会带来更大的CPU和内存开销；</li>
+<li>HTTPS通信需要证书，一般需要向证书颁发机构（CA）购买</li>
+</ol>
+<h3 id="3-一个完整的网络请求"><a href="#3-一个完整的网络请求" class="headerlink" title="3. 一个完整的网络请求"></a>3. 一个完整的网络请求</h3><p>（答的还不辍，哼唧）</p>
+<ol>
+<li>浏览器查询 DNS，获取域名对应的IP地址:具体过程包括浏览器搜索自身的DNS缓存、搜索操作系统的DNS缓存、读取本地的Host文件和向本地DNS服务器进行查询等。对于向本地DNS服务器进行查询，如果要查询的域名包含在本地配置区域资源中，则返回解析结果给客户机，完成域名解析(此解析具有权威性)；如果要查询的域名不由本地DNS服务器区域解析，但该服务器已缓存了此网址映射关系，则调用这个IP地址映射，完成域名解析（此解析不具有权威性）。如果本地域名服务器并未缓存该网址映射关系，那么将根据其设置发起递归查询或者迭代查询；</li>
+<li>浏览器获得域名对应的IP地址以后，浏览器向服务器请求建立链接，发起三次握手；</li>
+<li>TCP&#x2F;IP链接建立起来后，浏览器向服务器发送HTTP请求；</li>
+<li>服务器接收到这个请求，并根据路径参数映射到特定的请求处理器进行处理，并将处理结果及相应的视图返回给浏览器；</li>
+<li>浏览器解析并渲染视图，若遇到对js文件、css文件及图片等静态资源的引用，则重复上述步骤并向服务器请求这些资源；</li>
+<li>浏览器根据其请求到的资源、数据渲染页面，最终向用户呈现一个完整的页面。</li>
+</ol>
+<h3 id="4-HTTP-DNS属于哪一层"><a href="#4-HTTP-DNS属于哪一层" class="headerlink" title="4. HTTP DNS属于哪一层"></a>4. HTTP DNS属于哪一层</h3><p>应该是应用层，答成网络层了，当时意识到了，但是面试官已经准备问下一题了。</p>
+<h3 id="5-TCP三握四挥及原因"><a href="#5-TCP三握四挥及原因" class="headerlink" title="5. TCP三握四挥及原因"></a>5. TCP三握四挥及原因</h3><p>（答的还不辍，哼唧）</p>
+<h3 id="6-建立了一次HTTP连接以后，每次还要再TCP连接么？"><a href="#6-建立了一次HTTP连接以后，每次还要再TCP连接么？" class="headerlink" title="6. 建立了一次HTTP连接以后，每次还要再TCP连接么？"></a>6. 建立了一次HTTP连接以后，每次还要再TCP连接么？</h3><p>在HTTP&#x2F;1.0中默认使用短连接。也就是说，客户端和服务器每进行一次HTTP操作，就建立一次连接，任务结束就中断连接。当客户端浏览器访问的某个HTML或其他类型的Web页中包含有其他的Web资源（如JavaScript文件、图像文件、CSS文件等），每遇到这样一个Web资源，浏览器就会重新建立一个HTTP会话。</p>
+<p>而从HTTP&#x2F;1.1起，默认使用长连接，用以保持连接特性。使用长连接的HTTP协议，会在响应头加入这行代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection:keep-alive</span><br></pre></td></tr></table></figure>
+
+<p>在使用长连接的情况下，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，客户端再次访问这个服务器时，会继续使用这一条已经建立的连接。Keep-Alive不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如Apache）中设定这个时间。实现长连接需要客户端和服务端都支持长连接。</p>
+<p>HTTP协议的长连接和短连接，实质上是TCP协议的长连接和短连接。</p>
+<p>（忘记了，没答出来）</p>
+<h3 id="7-cookie-session-是什么"><a href="#7-cookie-session-是什么" class="headerlink" title="7. cookie session 是什么"></a>7. cookie session 是什么</h3><h3 id="8-线程、进程是什么"><a href="#8-线程、进程是什么" class="headerlink" title="8. 线程、进程是什么"></a>8. 线程、进程是什么</h3><p>（答的还不辍，哼唧）</p>
+<h3 id="9-进程间通信方式"><a href="#9-进程间通信方式" class="headerlink" title="9. 进程间通信方式"></a>9. 进程间通信方式</h3><p>没答完整</p>
+<ol>
+<li><p>管道(Pipe)</p>
+</li>
+<li><p>命名管道</p>
+</li>
+<li><p>消息队列</p>
+</li>
+<li><p>信号(Signal)</p>
+</li>
+<li><p>共享内存</p>
+</li>
+<li><p>信号量(Semaphore)：初始化操作、P操作、V操作；P操作：信号量-1，检测是否小于0，小于则进程进入阻塞状态；V操作：信号量+1，若小于等于0，则从队列中唤醒一个等待的进程进入就绪态</p>
+</li>
+<li><p>套接字(Socket)</p>
+</li>
+</ol>
+<h3 id="10-线程崩溃是否会造成进程崩溃？"><a href="#10-线程崩溃是否会造成进程崩溃？" class="headerlink" title="10. 线程崩溃是否会造成进程崩溃？"></a>10. 线程崩溃是否会造成进程崩溃？</h3><h3 id="11-hashmap底层实现"><a href="#11-hashmap底层实现" class="headerlink" title="11. hashmap底层实现"></a>11. hashmap底层实现</h3><h3 id="12-什么是哈希碰撞"><a href="#12-什么是哈希碰撞" class="headerlink" title="12. 什么是哈希碰撞"></a>12. 什么是哈希碰撞</h3><p>对象Hash的前提是实现equals()和hashCode()两个方法，那么HashCode()的作用就是保证对象返回唯一hash值，但当两个对象计算值一样时，这就发生了碰撞冲突。如下将介绍如何处理冲突，当然其前提是一致性hash。</p>
+<p>（答的还不辍，哼唧）</p>
+<h4 id="避免Hash碰撞策略"><a href="#避免Hash碰撞策略" class="headerlink" title="避免Hash碰撞策略"></a>避免Hash碰撞策略</h4><h5 id="1-开放地址法-再散列法"><a href="#1-开放地址法-再散列法" class="headerlink" title="1.开放地址法(再散列法)"></a>1.开放地址法(再散列法)</h5><p>开放地执法有一个公式:Hi&#x3D;(H(key)+di) MOD m i&#x3D;1,2,…,k(k&lt;&#x3D;m-1) 其中，m为哈希表的表长。di 是产生冲突的时候的增量序列。如果di值可能为1,2,3,…m-1，称线性探测再散列。如果di取1，则每次冲突之后，向后移动1个位置.如果di取值可能为1,-1,2,-2,4,-4,9,-9,16,-16,…kk,-kk(k&lt;&#x3D;m&#x2F;2)，称二次探测再散列。如果di取值可能为伪随机数列。称伪随机探测再散列。</p>
+<h5 id="2-再哈希法Rehash"><a href="#2-再哈希法Rehash" class="headerlink" title="2.再哈希法Rehash"></a>2.再哈希法Rehash</h5><p>当发生冲突时，使用第二个、第三个、哈希函数计算地址，直到无冲突时。缺点：计算时间增加。比如上面第一次按照姓首字母进行哈希，如果产生冲突可以按照姓字母首字母第二位进行哈希，再冲突，第三位，直到不冲突为止.这种方法不易产生聚集，但增加了计算时间。</p>
+<h5 id="3-链地址法（拉链法）"><a href="#3-链地址法（拉链法）" class="headerlink" title="3.链地址法（拉链法）"></a>3.链地址法（拉链法）</h5><p>将所有关键字为同义词的记录存储在同一线性链表中.基本思想:将所有哈希地址为i的元素构成一个称为同义词链的单链表，并将单链表的头指针存在哈希表的第i个单元中，因而查找、插入和删除主要在同义词链中进行。链地址法适用于经常进行插入和删除的情况。对比JDK 1.7 hashMap的存储结构是不是很好理解。至于1.8之后链表长度大于6rehash 为树形结构不在此处讨论。</p>
+<h3 id="13-hashmap何时扩容及时间复杂度"><a href="#13-hashmap何时扩容及时间复杂度" class="headerlink" title="13. hashmap何时扩容及时间复杂度"></a>13. hashmap何时扩容及时间复杂度</h3><h3 id="14-算法题：合并区间"><a href="#14-算法题：合并区间" class="headerlink" title="14. 算法题：合并区间"></a>14. 算法题：合并区间</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-intervals/">56.合并区间</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">1. 自我介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-HTTP%E5%92%8CHTTPS%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">2. HTTP和HTTPS的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="toc-number">3.</span> <span class="toc-text">3. 一个完整的网络请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-HTTP-DNS%E5%B1%9E%E4%BA%8E%E5%93%AA%E4%B8%80%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text">4. HTTP DNS属于哪一层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-TCP%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5%E5%8F%8A%E5%8E%9F%E5%9B%A0"><span class="toc-number">5.</span> <span class="toc-text">5. TCP三握四挥及原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%BB%BA%E7%AB%8B%E4%BA%86%E4%B8%80%E6%AC%A1HTTP%E8%BF%9E%E6%8E%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%AF%8F%E6%AC%A1%E8%BF%98%E8%A6%81%E5%86%8DTCP%E8%BF%9E%E6%8E%A5%E4%B9%88%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">6. 建立了一次HTTP连接以后，每次还要再TCP连接么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-cookie-session-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">7.</span> <span class="toc-text">7. cookie session 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E7%BA%BF%E7%A8%8B%E3%80%81%E8%BF%9B%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">8.</span> <span class="toc-text">8. 线程、进程是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="toc-number">9.</span> <span class="toc-text">9. 进程间通信方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E7%BA%BF%E7%A8%8B%E5%B4%A9%E6%BA%83%E6%98%AF%E5%90%A6%E4%BC%9A%E9%80%A0%E6%88%90%E8%BF%9B%E7%A8%8B%E5%B4%A9%E6%BA%83%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">10. 线程崩溃是否会造成进程崩溃？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-hashmap%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-number">11.</span> <span class="toc-text">11. hashmap底层实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="toc-number">12.</span> <span class="toc-text">12. 什么是哈希碰撞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%BF%E5%85%8DHash%E7%A2%B0%E6%92%9E%E7%AD%96%E7%95%A5"><span class="toc-number">12.1.</span> <span class="toc-text">避免Hash碰撞策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%BC%80%E6%94%BE%E5%9C%B0%E5%9D%80%E6%B3%95-%E5%86%8D%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">12.1.1.</span> <span class="toc-text">1.开放地址法(再散列法)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%86%8D%E5%93%88%E5%B8%8C%E6%B3%95Rehash"><span class="toc-number">12.1.2.</span> <span class="toc-text">2.再哈希法Rehash</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E9%93%BE%E5%9C%B0%E5%9D%80%E6%B3%95%EF%BC%88%E6%8B%89%E9%93%BE%E6%B3%95%EF%BC%89"><span class="toc-number">12.1.3.</span> <span class="toc-text">3.链地址法（拉链法）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-hashmap%E4%BD%95%E6%97%B6%E6%89%A9%E5%AE%B9%E5%8F%8A%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">13.</span> <span class="toc-text">13. hashmap何时扩容及时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E7%AE%97%E6%B3%95%E9%A2%98%EF%BC%9A%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4"><span class="toc-number">14.</span> <span class="toc-text">14. 算法题：合并区间</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2021/01/05/bytedance-interview/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&text=面经-后台开发实习生-番茄小说部门"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&is_video=false&description=面经-后台开发实习生-番茄小说部门"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=面经-后台开发实习生-番茄小说部门&body=Check out this article: https://m1luf0.github.io/2021/01/05/bytedance-interview/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&title=面经-后台开发实习生-番茄小说部门"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2021/01/05/bytedance-interview/&name=面经-后台开发实习生-番茄小说部门&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2021/01/05/bytedance-interview/&t=面经-后台开发实习生-番茄小说部门"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2024
+    m1luf0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

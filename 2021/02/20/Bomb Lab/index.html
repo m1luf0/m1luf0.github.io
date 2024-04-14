@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Bomb Lab - write up[TOC] 资源来自于GitHub Repo：ICS-15213-CSAPP3e-CMU 调试环境：  Ubuntu 20.04 LTS, cgdb-0.7.1 在 bomb 执行文件所在的文件夹下，打开 Terminal： 输入 cgdb bomb 开始调试 bomb 程序。按 Esc 进入 cgdb， ctrl + w 左右分屏，按i 切回 gdb。  对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP-Bomb Lab - write up">
+<meta property="og:url" content="https://m1luf0.github.io/2021/02/20/Bomb%20Lab/index.html">
+<meta property="og:site_name" content="m1luf0">
+<meta property="og:description" content="Bomb Lab - write up[TOC] 资源来自于GitHub Repo：ICS-15213-CSAPP3e-CMU 调试环境：  Ubuntu 20.04 LTS, cgdb-0.7.1 在 bomb 执行文件所在的文件夹下，打开 Terminal： 输入 cgdb bomb 开始调试 bomb 程序。按 Esc 进入 cgdb， ctrl + w 左右分屏，按i 切回 gdb。  对">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-e87c662c40986171f39475e55d85adc2_720w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-f3d2536bf29b0e355be328831c480489_720w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-b47ce5463725f2acfa97204a219259ae_720w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-dbef21a1d4947c7457ba1a05dd4b0a45_720w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-1dd786709094b834e13097e0a27070c0_720w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-1dd786709094b834e13097e0a27070c0_720w.jpg">
+<meta property="article:published_time" content="2021-02-20T10:54:34.000Z">
+<meta property="article:modified_time" content="2021-12-18T12:37:34.338Z">
+<meta property="article:author" content="m1luf0">
+<meta property="article:tag" content="CSAPP">
+<meta property="article:tag" content="LAB">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="GDB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic3.zhimg.com/80/v2-e87c662c40986171f39475e55d85adc2_720w.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CSAPP-Bomb Lab - write up</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021/04/27/interviewSum/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/01/06/didi-python-dev-interview/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&text=CSAPP-Bomb Lab - write up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&is_video=false&description=CSAPP-Bomb Lab - write up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSAPP-Bomb Lab - write up&body=Check out this article: https://m1luf0.github.io/2021/02/20/Bomb%20Lab/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&name=CSAPP-Bomb Lab - write up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&t=CSAPP-Bomb Lab - write up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bomb-Lab-write-up"><span class="toc-number">1.</span> <span class="toc-text">Bomb Lab - write up</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#bomb1"><span class="toc-number">1.1.</span> <span class="toc-text">bomb1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bomb2"><span class="toc-number">1.2.</span> <span class="toc-text">bomb2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bomb3"><span class="toc-number">1.3.</span> <span class="toc-text">bomb3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bomb4"><span class="toc-number">1.4.</span> <span class="toc-text">bomb4</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        CSAPP-Bomb Lab - write up
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">m1luf0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-20T10:54:34.000Z" class="dt-published" itemprop="datePublished">2021-02-20</time>
+        
+        (Updated: <time datetime="2021-12-18T12:37:34.338Z" class="dt-updated" itemprop="dateModified">2021-12-18</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/OS/">OS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/C/" rel="tag">C++</a>, <a class="p-category" href="/tags/CSAPP/" rel="tag">CSAPP</a>, <a class="p-category" href="/tags/GDB/" rel="tag">GDB</a>, <a class="p-category" href="/tags/LAB/" rel="tag">LAB</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Bomb-Lab-write-up"><a href="#Bomb-Lab-write-up" class="headerlink" title="Bomb Lab - write up"></a>Bomb Lab - write up</h1><p>[TOC]</p>
+<p>资源来自于GitHub Repo：<code>ICS-15213-CSAPP3e-CMU</code></p>
+<p>调试环境： <code> Ubuntu 20.04 LTS, cgdb-0.7.1</code></p>
+<p>在 <code>bomb</code> 执行文件所在的文件夹下，打开 Terminal：</p>
+<p>输入 <code>cgdb bomb</code> 开始调试 bomb 程序。按 <code>Esc</code> 进入 cgdb， <code>ctrl + w</code> 左右分屏，按<code>i</code> 切回 gdb。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-e87c662c40986171f39475e55d85adc2_720w.jpg"></p>
+<p>对照 <code>bomb.c</code> 找到 <code>phase_1(input); </code> 将此行设置为断点位置： <code>break 74</code>, 即 break 空格 加上行号。</p>
+<p>创建一个文件 <code>in</code>,  在第一行随便输入一些内容。</p>
+<h2 id="bomb1"><a href="#bomb1" class="headerlink" title="bomb1"></a>bomb1</h2><p><code>run &lt; in</code> , 程序行至断点处，<code>stepi</code> 进入 <code>phase_1()</code> 函数内部。显示如下汇编内容：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-f3d2536bf29b0e355be328831c480489_720w.jpg" alt="image-20210219210624203"></p>
+<p>第 3 行：把 <code>0x402400</code> 放进了 <code>%esi</code> 作为函数参数。</p>
+<p>第 4 行：调用了<code>strings_not_equal</code>判断两个字符串是否不同。</p>
+<p>第 5 行：判断 <code>%eax</code> 是否为0，如果为0，则跳过第 7 行，运行至 +23 处，即第 8 行。</p>
+<p>由上分析可知， <code>phase_1()</code> 的输入是 <code>%esi</code>中的内容，即 <code>0x402400</code>。</p>
+<p>输入<code>print (char*) 0x402400</code> 得到 <code>$4 = 0x402400 &quot;Border relations with Canada have never been better.&quot;</code></p>
+<h2 id="bomb2"><a href="#bomb2" class="headerlink" title="bomb2"></a>bomb2</h2><p>在文件 <code>in</code>, 在第一行输入 <code>Border relations with Canada have never been better.</code>  跳过bomb1。第二行随意写。</p>
+<p>输入 <code>run &lt; in</code>, 观察第二个断点位置，设置在<code>break 82</code>。</p>
+<p>输入<code>step</code>  、<code>finish</code> 等命令，在 <code>phase_2(input)</code> 处输入<code>stepi</code> 进入第二个炸弹函数。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-b47ce5463725f2acfa97204a219259ae_720w.jpg" alt="image-20210220162257086"></p>
+<p>观察到 第 6 行读取 6 个数字。</p>
+<p>第 7 行： 比较 1 和 <code>%rsp</code> 中指向的第一个数据</p>
+<p>第 8 行： 如果相等，则跳到 +52 处，即第 20 行。 如果不相等，则进入第 9 行引爆炸弹。</p>
+<p>第 20 行： <code>%rsp</code> 拿出指向位置 + 0x4 的数据，放入 <code>%rbx</code></p>
+<p>第 21 行： <code>%rsp</code> 拿出指向位置 + 0x18 的数据，放入 <code>%rbp</code></p>
+<p>第 22 行： 跳回第 11 行。</p>
+<p><strong>小结</strong>： 输入内容为 6 个数字，<strong>并且第一个数字必须为 1</strong>。<code>%rbx</code> 指向的内容此时为第 2 个数字。</p>
+<hr>
+<p>第 11 行：<code>%rbx</code> 拿出前一个数字 <code>%rbx - 0x4</code> 放入 <code>%eax</code></p>
+<p>第 12 行：<code>%eax = %eax + %eax</code></p>
+<p>第 13 行： 比较 <code>%eax</code> 和 <code>%rbx</code> 中指向的数据。</p>
+<p>第 14 行：如果相等，则跳到 +41 处，即第 16 行。 如果不相等，则进入第 15 行引爆炸弹。</p>
+<p><strong>小结</strong>：因为 <code>%eax</code> 为 <code>%rbx</code> 指向数字的前一个数字，经过第 12 行的累加，<code>%eax</code> 为 <code>%rbx</code> 指向数字的前一个数字的两倍。要想炸弹不爆炸，则 <code>%rbx</code> 现在指向的数字必须为前一个数字的两倍。对于全输入的6个数字来说，<strong>第二个数字就是 1 的两倍，为 2</strong> 。</p>
+<hr>
+<p>第 16 行：<code>%rbx = %rbx + 0x4</code></p>
+<p>第 17 行：比较 <code>%rbp</code> 和 <code>%rbx</code> 中的数据</p>
+<p>第 18 行：如果不相等，则跳到 +27 处，即  第 11 行。</p>
+<p><strong>小结</strong>：<code>%rbx</code> 变为下一个输入的数字，对于 11-18 行的代码，他们属于一个循环。<strong>每次循环都在验证当前的数字是否为前一个数字的两倍</strong>。</p>
+<hr>
+<p>综上，输入的 6 个数字为公比为 2 的等比数列：<code>1 2 4 8 16 32</code>。</p>
+<h2 id="bomb3"><a href="#bomb3" class="headerlink" title="bomb3"></a>bomb3</h2><p>在文件 <code>in</code>, 在第一行输入 <code>Border relations with Canada have never been better.</code>  跳过bomb1。第二行输入 <code>1 2 4 8 16 32</code>。第三行随意写。</p>
+<p>输入 <code>run &lt; in</code>, 观察第二个断点位置，设置在<code>break 89</code>。</p>
+<p>输入<code>step</code>  、<code>finish</code> 等命令，在 <code>phase_3(input)</code> 处输入<code>stepi</code> 进入第三个炸弹函数</p>
+<p><img src="https://pic2.zhimg.com/80/v2-dbef21a1d4947c7457ba1a05dd4b0a45_720w.jpg" alt="image-20210220172800167"></p>
+<p>输入 <code>stepi</code> 一步步观察运行位置：</p>
+<p>第 8 行：比较 <code>0x1</code> 和 <code>%eax</code> 的大小</p>
+<p>第 9 行：如果 <code>%eax</code> 的内容比 <code>0x1</code> 大，就跳到第 11 行，否则继续执行到第 10 行爆炸。</p>
+<p>那么 <code>%eax</code> 的内容在哪里呢？</p>
+<p>在第 7 行调用的 <code>sscanf</code> 函数中获取了我们输入的数字, <code>%eax</code> 存储的是<code>sscanf</code>函数的返回值。</p>
+<p><strong>小结</strong>：<code>%eax</code>  必须大于 1，所以至少<strong>输入 2 个参数</strong>。</p>
+<hr>
+<p>第 11 行：比较 <code>0x7</code> 和 <code>(%rsp) + 0x8</code> 的结果。</p>
+<p>第 12 行：如果  <code>(%rsp) + 0x8</code>  比 <code>0X7</code> 大，则炸弹爆炸。</p>
+<p>第 13 行：<code>(%rsp) + 0x8</code> 放入 <code>%eax</code> 中。第 14 行：跳到第 17 行。</p>
+<p>第 17 行：<code>0x2c3</code> 放入 <code>%eax</code> 中。第 18 行：跳到第 33 行。</p>
+<p>第 33 行：比较 <code>0xc(%rsp)</code>和<code>%eax</code> 中的内容。</p>
+<p>第 34 行：如果相等，则结束，否则炸弹爆炸。</p>
+<p><strong>小结</strong>：第一个参数<code>(%rsp) + 0x8</code>  要比 7 小。第二个参数 <code>0xc(%rsp)</code> 要和 <code>0x2c3</code> 相等。通过计算，<code>0x2c3</code> 的十进制为 <code>707</code>。</p>
+<p><strong>综上</strong>，答案为 <code>2 707</code> ，不唯一。</p>
+<h2 id="bomb4"><a href="#bomb4" class="headerlink" title="bomb4"></a>bomb4</h2><p>在文件 <code>in</code>, 在第一行输入 <code>Border relations with Canada have never been better.</code>  跳过bomb1。第二行输入 <code>1 2 4 8 16 32</code>。第三行输入<code>2 707</code>，第四行随意写。</p>
+<p>输入 <code>run &lt; in</code>, 观察第二个断点位置，设置在<code>break 95</code>。</p>
+<p>输入<code>step</code>  、<code>finish</code> 等命令，在 <code>phase_4(input)</code> 处输入<code>stepi</code> 进入第四个炸弹函数。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-1dd786709094b834e13097e0a27070c0_720w.jpg" alt="image-20210220225042778"></p>
+<p>第 7 - 9 行调用的 <code>sscanf</code> 函数中获取了我们输入的数字, <code>%eax</code> 存储的是<code>sscanf</code>函数的返回值，如果输入参数个数不等于 2 ，那么跳到第 12 行炸弹爆炸。</p>
+<p>第 10 - 12 行，比较<code>(%rsp) + 0x8</code>是否小于等于 <code>0xe</code>，即第一个参数是否小于等于 14 ，有就跳到第 13 行，没有就执行到第 12 行炸弹爆炸。</p>
+<p>第 16 行进入 <code>func4</code> </p>
+<p><img src="https://pic1.zhimg.com/80/v2-1dd786709094b834e13097e0a27070c0_720w.jpg" alt="image-20210220232742815"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rcx &gt;&gt;= <span class="number">0x1f</span></span><br><span class="line">eax += ecx</span><br><span class="line">eax &gt;&gt;= <span class="number">1</span></span><br><span class="line">ecx = rax + rsi*<span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> (ecx &lt;= edi)&#123;</span><br><span class="line">    eax = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> ecx &gt;= edi&#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        esi = rcx + <span class="number">0x1</span></span><br><span class="line">        func4()</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    edx = rcx - <span class="number">0x1</span></span><br><span class="line">    func4()</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​                                                                                             </p>
+<p>第 17 - 18 行，检查<code>%eax</code> 即 <code>func4</code>的返回值是否为 0，如果不为 0 炸弹爆炸。否则继续执行到第 19 行。</p>
+<p>第 19 行： 比较 第二个输入数字是否为0，如果不为 0 炸弹爆炸，否则跳到第 22 行结束。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bomb-Lab-write-up"><span class="toc-number">1.</span> <span class="toc-text">Bomb Lab - write up</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#bomb1"><span class="toc-number">1.1.</span> <span class="toc-text">bomb1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bomb2"><span class="toc-number">1.2.</span> <span class="toc-text">bomb2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bomb3"><span class="toc-number">1.3.</span> <span class="toc-text">bomb3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bomb4"><span class="toc-number">1.4.</span> <span class="toc-text">bomb4</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&text=CSAPP-Bomb Lab - write up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&is_video=false&description=CSAPP-Bomb Lab - write up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSAPP-Bomb Lab - write up&body=Check out this article: https://m1luf0.github.io/2021/02/20/Bomb%20Lab/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&title=CSAPP-Bomb Lab - write up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&name=CSAPP-Bomb Lab - write up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2021/02/20/Bomb%20Lab/&t=CSAPP-Bomb Lab - write up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2024
+    m1luf0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

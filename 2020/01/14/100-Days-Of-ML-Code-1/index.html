@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="原项目地址:https:&#x2F;&#x2F;github.com&#x2F;MLEveryday&#x2F;100-Days-Of-ML-Code&#x2F;blob&#x2F;master&#x2F;Code&#x2F;Day%201_Data_Preprocessing.md (实际上50多天原作者就弃坑了 -目录- [TOC] Day1:数据预处理![img](https:&#x2F;&#x2F;github.com&#x2F;MachineLearning100&#x2F;100-Days-Of-ML-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="100-Days-Of-ML-Code">
+<meta property="og:url" content="https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/index.html">
+<meta property="og:site_name" content="m1luf0">
+<meta property="og:description" content="原项目地址:https:&#x2F;&#x2F;github.com&#x2F;MLEveryday&#x2F;100-Days-Of-ML-Code&#x2F;blob&#x2F;master&#x2F;Code&#x2F;Day%201_Data_Preprocessing.md (实际上50多天原作者就弃坑了 -目录- [TOC] Day1:数据预处理![img](https:&#x2F;&#x2F;github.com&#x2F;MachineLearning100&#x2F;100-Days-Of-ML-">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403195104.png">
+<meta property="og:image" content="c:\Users\yuehan lian\AppData\Roaming\Typora\typora-user-images\image-20200403195132403.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403195253.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403195830.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403211448.png">
+<meta property="article:published_time" content="2020-01-13T19:14:12.000Z">
+<meta property="article:author" content="m1luf0">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403195104.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>100-Days-Of-ML-Code</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2020/04/23/spotify/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2020/01/14/Google%20ML/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&text=100-Days-Of-ML-Code"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&is_video=false&description=100-Days-Of-ML-Code"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=100-Days-Of-ML-Code&body=Check out this article: https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&name=100-Days-Of-ML-Code&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&t=100-Days-Of-ML-Code"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Day1-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">Day1:数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day2-%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">Day2:简单线性回归模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day3-%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">3.</span> <span class="toc-text">Day3:多元线性回归</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        100-Days-Of-ML-Code
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">m1luf0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-01-13T19:14:12.000Z" class="dt-published" itemprop="datePublished">2020-01-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Machine-Learning/">Machine Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Python/" rel="tag">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>原项目地址:<a target="_blank" rel="noopener" href="https://github.com/MLEveryday/100-Days-Of-ML-Code/blob/master/Code/Day%201_Data_Preprocessing.md">https://github.com/MLEveryday/100-Days-Of-ML-Code/blob/master/Code/Day%201_Data_Preprocessing.md</a></p>
+<p>(实际上50多天原作者就弃坑了</p>
+<p>-目录-</p>
+<p>[TOC]</p>
+<h2 id="Day1-数据预处理"><a href="#Day1-数据预处理" class="headerlink" title="Day1:数据预处理"></a>Day1:数据预处理</h2><p>![img](<a target="_blank" rel="noopener" href="https://github.com/MachineLearning100/100-Days-Of-ML-Code/raw/master/Info-graphs/Day">https://github.com/MachineLearning100/100-Days-Of-ML-Code/raw/master/Info-graphs/Day</a> 1.jpg)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入库</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> sklearn.preprocessing <span class="keyword">import</span></span><br><span class="line">dataset=pd.read_csv(<span class="string">&quot;C:/Users/匿了匿了/Documents/GitHub/100-Days-Of-ML-Code/datasets/Data.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>查看dataset</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入数据集</span></span><br><span class="line">x=dataset.iloc[:,:-<span class="number">1</span>].values</span><br><span class="line">y=dataset.iloc[:,<span class="number">3</span>].values</span><br><span class="line"><span class="comment">#全部行 or 列；[a]第a行 or 列</span></span><br><span class="line"><span class="comment"># [a,b,c]第 a,b,c 行 or 列</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#处理丢失数据</span></span><br><span class="line"><span class="keyword">from</span> sklearn.impute <span class="keyword">import</span> SimpleImputer</span><br><span class="line">imputer=SimpleImputer(missing_values=np.nan,strategy=<span class="string">&#x27;mean&#x27;</span>)<span class="comment">#本来NaN的地方填充上平均值</span></span><br><span class="line">imputer=imputer.fit(x[:,<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line">x[:,<span class="number">1</span>:<span class="number">3</span>]=imputer.transform(x[:,<span class="number">1</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#解析分类数据</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder,OneHotEncoder</span><br><span class="line">labelencoder_x=LabelEncoder()</span><br><span class="line">x[:,<span class="number">0</span>]=labelencoder_x.fit_transform(x[:,<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建虚拟变量</span></span><br><span class="line">onehotencoder=OneHotEncoder(categories=<span class="string">&#x27;auto&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> ColumnTransformer</span><br><span class="line">t=ColumnTransformer([(<span class="string">&#x27;encoder&#x27;</span>,OneHotEncoder(),[<span class="number">0</span>])],remainder=<span class="string">&#x27;passthrough&#x27;</span>)</span><br><span class="line">temp=np.array(t.fit_transform(x))</span><br><span class="line">labelencoder_y=LabelEncoder()</span><br><span class="line">y=labelencoder_y.fit_transform(y)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拆分数据集为训练集合和测试集合</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=<span class="number">0.2</span>,random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#特征量化</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">sc_x=StandardScaler()</span><br><span class="line">x_train=sc_x.fit_transform(x_train)</span><br><span class="line">x_test=sc_x.transform(x_test)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Day2-简单线性回归模型"><a href="#Day2-简单线性回归模型" class="headerlink" title="Day2:简单线性回归模型"></a>Day2:简单线性回归模型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第一步：数据预处理</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="comment">#Q1:Backend TkAgg is interactive backend. Turning interactive mode on.</span></span><br><span class="line"><span class="comment">#因为在Console里交互,所以不能在图形化界面显示图片</span></span><br><span class="line">plt.ion()</span><br><span class="line">dataset=pd.read_csv(<span class="string">&quot;C:/Users/匿了匿了/Documents/GitHub/100-Days-Of-ML-Code/datasets/studentscores.csv&quot;</span>)</span><br><span class="line">x=dataset.iloc[:,:<span class="number">1</span>].values</span><br><span class="line">y=dataset.iloc[:,<span class="number">1</span>].values</span><br><span class="line">x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=<span class="number">1</span>/<span class="number">4</span>,random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<img src="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403195104.png" style="zoom:50%;" />
+
+<img src="C:\Users\yuehan lian\AppData\Roaming\Typora\typora-user-images\image-20200403195132403.png" alt="image-20200403195132403" style="zoom:50%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第二步：训练集使用简单线性回归模型来训练</span></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line">regressor=LinearRegression()</span><br><span class="line">regressor=regressor.fit(x_train,y_train)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403195253.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第三步：预测结果</span></span><br><span class="line">y_pred=regressor.predict(x_test)</span><br></pre></td></tr></table></figure>
+
+<p>![image-20200403195322599](C:\Users\yuehan lian\AppData\Roaming\Typora\typora-user-images\image-20200403195322599.png)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第四步：可视化</span></span><br><span class="line"><span class="comment">#训练集结果可视化</span></span><br><span class="line">plt.scatter(x_train,y_train,color=<span class="string">&#x27;red&#x27;</span>)</span><br><span class="line">plt.plot(x_train,regressor.predict(x_train),color=<span class="string">&#x27;blue&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#测试集结果可视化</span></span><br><span class="line">plt.scatter(x_test,y_test,color=<span class="string">&#x27;pink&#x27;</span>)</span><br><span class="line">plt.plot(x_test,regressor.predict(x_test),color=<span class="string">&#x27;green&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Day3-多元线性回归"><a href="#Day3-多元线性回归" class="headerlink" title="Day3:多元线性回归"></a>Day3:多元线性回归</h2><p><img src="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403195830.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第1步: 数据预处理</span></span><br><span class="line"><span class="comment">#导入库</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">#导入数据集</span></span><br><span class="line">dataset=pd.read_csv(<span class="string">&#x27;C:/Users/匿了匿了/Documents/GitHub/100-Days-Of-ML-Code/datasets/50_Startups.csv&#x27;</span>)</span><br><span class="line">x = dataset.iloc[ : , :-<span class="number">1</span>].values</span><br><span class="line">y = dataset.iloc[ : ,  <span class="number">4</span> ].values</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将类别数据数字化</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder,OneHotEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> ColumnTransformer</span><br><span class="line">labelencoder=LabelEncoder()</span><br><span class="line">x[:,<span class="number">3</span>]=labelencoder.fit_transform(x[:,<span class="number">3</span>])</span><br><span class="line">onehotencoder=OneHotEncoder(categories=<span class="string">&#x27;auto&#x27;</span>)</span><br><span class="line">t=ColumnTransformer([(<span class="string">&#x27;encoder&#x27;</span>,OneHotEncoder(),[<span class="number">3</span>])],remainder=<span class="string">&#x27;passthrough&#x27;</span>)</span><br><span class="line">x=np.array(t.fit_transform(x))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#躲避虚拟变量陷阱</span></span><br><span class="line">x=x[:,<span class="number">1</span>:]</span><br></pre></td></tr></table></figure>
+
+<img src="https://raw.githubusercontent.com/fafaface/Picgo_Typora/master/icgo/20200403211448.png" style="zoom:50%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拆分数据集为训练集和测试集</span></span><br><span class="line">x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=<span class="number">0.2</span>,random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第2步： 在训练集上训练多元线性回归模型</span></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line">regressor=LinearRegression()</span><br><span class="line">regressor.fit(x_train,y_train)</span><br><span class="line">y_pred=regressor.predict(x_test)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Step 3: 在测试集上预测结果</span></span><br><span class="line">y_pred=regressor.predict(x_test)</span><br></pre></td></tr></table></figure>
+
+
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Day1-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">Day1:数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day2-%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">Day2:简单线性回归模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Day3-%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">3.</span> <span class="toc-text">Day3:多元线性回归</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&text=100-Days-Of-ML-Code"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&is_video=false&description=100-Days-Of-ML-Code"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=100-Days-Of-ML-Code&body=Check out this article: https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&title=100-Days-Of-ML-Code"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&name=100-Days-Of-ML-Code&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2020/01/14/100-Days-Of-ML-Code-1/&t=100-Days-Of-ML-Code"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2024
+    m1luf0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

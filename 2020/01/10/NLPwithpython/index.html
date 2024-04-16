@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Q1:遇到nltk.downlad() 出现远程服务器关闭的错误,无法下载book的数据A1:用cmd命令行运行 python会出错,但是改成用python 的3.7.0 的shell使用 12&gt;&gt;&gt;import nltk &gt;&gt;&gt;nltk.download()  则成功打开GUI可视化下载界面，但是进度条旁边出现了Aborting　download．．．所以必须">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP with Python">
+<meta property="og:url" content="https://m1luf0.github.io/2020/01/10/NLPwithpython/index.html">
+<meta property="og:site_name" content="m1luf0">
+<meta property="og:description" content="Q1:遇到nltk.downlad() 出现远程服务器关闭的错误,无法下载book的数据A1:用cmd命令行运行 python会出错,但是改成用python 的3.7.0 的shell使用 12&gt;&gt;&gt;import nltk &gt;&gt;&gt;nltk.download()  则成功打开GUI可视化下载界面，但是进度条旁边出现了Aborting　download．．．所以必须">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-09T19:14:12.000Z">
+<meta property="article:author" content="m1luf0">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="NLTK">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>NLP with Python</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2020/01/14/Google%20ML/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/03/29/The%20Crossing/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2020/01/10/NLPwithpython/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&text=NLP with Python"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&is_video=false&description=NLP with Python"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NLP with Python&body=Check out this article: https://m1luf0.github.io/2020/01/10/NLPwithpython/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&name=NLP with Python&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2020/01/10/NLPwithpython/&t=NLP with Python"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        NLP with Python
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">m1luf0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-01-09T19:14:12.000Z" class="dt-published" itemprop="datePublished">2020-01-10</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/NLP/">NLP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/NLTK/" rel="tag">NLTK</a>, <a class="p-category" href="/tags/Python/" rel="tag">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>Q1:遇到nltk.downlad() 出现远程服务器关闭的错误,无法下载book的数据<br>A1:用cmd命令行运行 python会出错,但是改成用python 的3.7.0 的shell使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;import nltk </span><br><span class="line">&gt;&gt;&gt;nltk.download()</span><br></pre></td></tr></table></figure>
+
+<p>则成功打开GUI可视化下载界面，但是进度条旁边出现了Aborting　download．．．<br>所以必须手动下载NLTK包,网盘里有。然后将下载好的nltk_data解压后的文件夹放到GUI界面里显示的放置路径里就可以了,用from nltk.book import *在Python shell里面测试是否成功安装。</p>
+<p>切换Python版本,例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">py -<span class="number">3</span> -m pip install xxx</span><br></pre></td></tr></table></figure>
+
+<p>2020.1.16<br>发现用python shell安装package太麻烦了,果然还是想用pycharm<br>只需要在pycharm里面,用terminal,安装ipython ,测试有没有安装好nltk,就可以直接使用了<br>而且使用到numpy的matplotlib的函数也可以直接用。就不需要研究这些包怎么安装了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#搜索某词语</span><br><span class="line">text1.concordance(&quot;lived&quot;) </span><br><span class="line">#搜索相关的词语</span><br><span class="line">text1.similar(&quot;monstrous&quot;)</span><br><span class="line">#看本语料库的信息</span><br><span class="line">text1</span><br><span class="line">#研究两个或两个以上的词共同的上下文,</span><br><span class="line">text2.common_contexts([&quot;monstrous&quot;,&quot;very&quot;])</span><br><span class="line">#查看一个或多个词在文本位置中的分布的离散图</span><br><span class="line">text4.dispersion_plot([&quot;citizens&quot;,&quot;democracy&quot;,&quot;freedom&quot;])</span><br><span class="line">#根据源文本生成随机对应风格的文本</span><br><span class="line">text3.generate()</span><br><span class="line">#计算文本从头到尾的长度</span><br><span class="line">len(text3)</span><br><span class="line">#获得text的词汇表</span><br><span class="line">set(text3)</span><br><span class="line">#获得经过排序的text词汇表</span><br><span class="line">sorted(set(text3))</span><br><span class="line">#~上面获得的内容叫做唯一项目类型,而不是词类型,因为包括标点符号~</span><br><span class="line">#每个字被平均使用的次数</span><br><span class="line">len(text3)/len(set(text3))</span><br><span class="line">#计算一个词在文本中出现的次数</span><br><span class="line">text3.count(&quot;smote&quot;)</span><br><span class="line">#计算一个特定词在文本中占据的百分比</span><br><span class="line">100*text4.count(&#x27;a&#x27;)/len(text4)</span><br><span class="line">#每次重读输入这些函数,会很繁琐,所以定义函数计算百分比等数据</span><br><span class="line">def percentage(count,total):</span><br><span class="line">    return 100*count/total</span><br></pre></td></tr></table></figure>
+
+
+<p>列表&#x2F;链表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#创建一个列表</span><br><span class="line">sent1=[&#x27;Call&#x27;,&#x27;me&#x27;,&#x27;Ishmael&#x27;,&#x27;.&#x27;]</span><br><span class="line">#其实nltk包里已经定义好了sent1,sent2....sent9</span><br><span class="line">sent1</span><br><span class="line">#列表可以直接相加,成为一个新列表。这个叫做连接。</span><br><span class="line">[&#x27;小米&#x27;,&#x27;最近在读&#x27;]+[&#x27;推荐&#x27;,&#x27;系统&#x27;]</span><br><span class="line">#不必逐字输入,用别名也行</span><br><span class="line">sent1+sent2</span><br><span class="line">#在列表中追加一个新的元素。这个叫做追加。</span><br><span class="line">sent1.append(&quot;Some&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>索引列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#根据位置查询词语的下标,下标从0开始</span><br><span class="line">text4[173]</span><br><span class="line">#根据词语查询第一次出现的下标</span><br><span class="line">text4.index(&#x27;awaken&#x27;)</span><br><span class="line">#获取子列表,从大文本中任意抽取语言片段,这个叫做切片</span><br><span class="line">text5[16715:16735]</span><br><span class="line">#5:8</span><br><span class="line">sent=[&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;4&#x27;,&#x27;5&#x27;,&#x27;6&#x27;,&#x27;7&#x27;,&#x27;8&#x27;,&#x27;9&#x27;]</span><br><span class="line">sent[5:8]</span><br><span class="line">结果是 6,7,8</span><br><span class="line">sent[:8]</span><br><span class="line">结果是 1,2,3,...,8</span><br><span class="line">sent[2:]</span><br><span class="line">结果是 3,...,9</span><br></pre></td></tr></table></figure>
+
+
+<p>字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#对于访问列表方式,同样可以运用到字符串上</span><br><span class="line">&gt;&gt;&gt; name=&#x27;Morty&#x27;</span><br><span class="line">&gt;&gt;&gt; name*2</span><br><span class="line">&#x27;MortyMorty&#x27;</span><br><span class="line">#把词用列表连接起来,拼接成单个字符串</span><br><span class="line">&gt;&gt;&gt;&#x27;这里输入用于连接的字符&#x27;.join([&#x27;Morty&#x27;,&#x27;Python&#x27;])</span><br><span class="line">&#x27;Morty这里输入用于连接的字符Python&#x27;</span><br><span class="line">#把字符串分割成一个链表</span><br><span class="line">&gt;&gt;&gt;&#x27;Morty Python&#x27;.split()</span><br><span class="line">[&#x27;Morty&#x27;,&#x27;Python&#x27;]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>计算语言：简单的统计</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;tokens=[&#x27;After&#x27;, &#x27;all&#x27;, &#x27;done&#x27;, &#x27;is&#x27;, &#x27;more&#x27;, &#x27;said&#x27;, &#x27;than&#x27;]</span><br><span class="line">tokens[-2:]</span><br><span class="line">[&#x27;said&#x27;, &#x27;than&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>频率分布：表示文本中每一个词项的频率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#寻找该文本中最常见的50个词</span><br><span class="line">&gt;&gt;&gt;fdist1=FreqDist(text1)</span><br><span class="line">&gt;&gt;&gt;vocabulary1=fdist1.keys()</span><br><span class="line">&gt;&gt;&gt;vocabulary1[:50]</span><br><span class="line">报错：&#x27;dict_keys&#x27; object is not subscriptable</span><br><span class="line">#这是Python3才会出现的错误，需改成</span><br><span class="line">&gt;&gt;&gt;vocabulary1=list(fdist1.most_common(50))</span><br><span class="line">&gt;&gt;&gt;vocabulary1</span><br><span class="line">#这样才能得到正确的结果，因为先前的vocabulary不能进行切片</span><br><span class="line">#生成前频率最高的50个词的累计频率图</span><br><span class="line">fdist1.plot(50,cumulative=True)</span><br><span class="line">#列出只出现了一次的词</span><br><span class="line">fdist1.hapaxes()</span><br></pre></td></tr></table></figure>
+
+<p>细粒度的选择词<br>设性质P：一个超过15个字符的词，V代表这个词汇表<br>a. {w | w ∈ V &amp; P(w)}<br>b. [w for w in V if p(w)]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#筛选出该文本v中的超过15个字符的</span><br><span class="line">v=set(text1)</span><br><span class="line">long_words=[w for w in v if len(w) &gt;15 ]</span><br><span class="line">sorted(long_words)#排序，发现大写在前，小写在后</span><br><span class="line">#筛选出该文本中的长低频词</span><br><span class="line">&gt;&gt;&gt;fidst5=FreqDist(text5)</span><br><span class="line">&gt;&gt;&gt; sorted([w for w in set(text5) if len(w)&gt;7 and fidst5[w]&gt;7])</span><br></pre></td></tr></table></figure>
+
+
+<p>词语搭配和双连词（bigrams)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#Q1：&gt;&gt;&gt;bigrams([&#x27;more&#x27;,&#x27;is&#x27;,&#x27;said&#x27;,&#x27;than&#x27;,&#x27;done&#x27;])</span><br><span class="line"> Error:&lt;generator object bigrams at 0x1E176070&gt;</span><br><span class="line"> #A1:&gt;&gt;&gt;list(bigrams([]&#x27;more&#x27;,&#x27;is&#x27;,&#x27;said&#x27;,&#x27;than&#x27;,&#x27;done&#x27;])</span><br><span class="line"> [(&#x27;more&#x27;, &#x27;is&#x27;), (&#x27;is&#x27;, &#x27;said&#x27;), (&#x27;said&#x27;, &#x27;than&#x27;), (&#x27;than&#x27;, &#x27;done</span><br><span class="line">&#x27;)]</span><br><span class="line">#Q2:&gt;&gt;&gt;text4.collocations()</span><br><span class="line">ValueError      Traceback (most recent call last)</span><br><span class="line">#A2:&gt;&gt;&gt;text4.colocation_list()</span><br><span class="line">[&#x27;United States&#x27;,</span><br><span class="line"> &#x27;fellow citizens&#x27;,</span><br><span class="line"> &#x27;four years&#x27;,</span><br><span class="line"> &#x27;years ago&#x27;,</span><br><span class="line"> &#x27;Federal Government&#x27;,</span><br><span class="line">#......省略</span><br><span class="line"> &#x27;one another&#x27;,</span><br><span class="line"> &#x27;foreign nations&#x27;,</span><br><span class="line"> &#x27;political parties&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>计数其他东西</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#创造一个列表，其中每个数字是文本中对应词的长度</span><br><span class="line">&gt;&gt;&gt;[len(w) for w in text1]</span><br><span class="line">&gt;&gt;&gt;fdist=FreqDist([len(w) for w in text1])</span><br><span class="line">&gt;&gt;&gt;fdist</span><br><span class="line">#以频率递减顺序排序的样本列表</span><br><span class="line">&gt;&gt;&gt;fdist.keys()</span><br><span class="line">#(长度,频率)</span><br><span class="line">&gt;&gt;&gt;fdist.items()</span><br><span class="line">#最大频率的长度</span><br><span class="line">&gt;&gt;&gt;fdist.max()</span><br><span class="line">#长度为3的词在全书单词中的频率</span><br><span class="line">&gt;&gt;&gt;fdist.freq(3)</span><br><span class="line">#增加样本</span><br><span class="line">&gt;&gt;&gt;fdist.inc(sample)</span><br><span class="line">#样本总数</span><br><span class="line">&gt;&gt;&gt;fdist.N() </span><br><span class="line">#频率分布表</span><br><span class="line">&gt;&gt;&gt;fdist.tabulate()</span><br><span class="line">#测试样本在fdist1中出现的频率是否小于fdist2</span><br><span class="line">fdist1&lt;fdist2</span><br></pre></td></tr></table></figure>
+
+<p>1.4回到python:决策与控制<br>让机器能按照我们的意愿决策，遇到特定条件时执行特定命令，这一特征被成为控制。<br>条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[w for w in sent7 if len(w) &lt; 4]</span><br><span class="line">#其中， &lt;可以换成其他条件符号</span><br><span class="line">[w for w in text if condition]</span><br><span class="line">#测试s是否以t开头</span><br><span class="line">s.startswith(t)</span><br><span class="line">#测试s是否以t结尾</span><br><span class="line">s.endswith(t)</span><br><span class="line">#测试s是否包含t</span><br><span class="line">t in s </span><br><span class="line">#测试s是否所有字符都是小写字母</span><br><span class="line">s.islower()</span><br><span class="line">#测试s是否所有字符都是大写字母</span><br><span class="line">s.isupper()</span><br><span class="line">#测试s是否所有字符都是字母</span><br><span class="line">s.isalpha()</span><br><span class="line">#测试s是否所有字符都是字母或数字</span><br><span class="line">s.isalnum()</span><br><span class="line">#测试s是否所有字符都是数字</span><br><span class="line">s.isdigit()</span><br><span class="line">#测试s是否所有字符都是首字母大写</span><br><span class="line">s.istitle()</span><br></pre></td></tr></table></figure>
+
+
+<p>文本中选择词汇运算符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;sorted([w for w in set(text1) if w.endswith(&#x27;ableness&#x27;)])</span><br><span class="line">&gt;&gt;&gt;sorted([item for item in set(sent7) if item.isdigit()])</span><br><span class="line">&gt;&gt;&gt;sorted([item for item in set(text6) if item.istitle()])</span><br><span class="line">&gt;&gt;&gt;sorted([term for term in set(text4) if &#x27;gnt&#x27; in term])</span><br><span class="line">&gt;&gt;&gt;sorted([w for w in set(text7) if &#x27;-&#x27; in w and &#x27;index&#x27; in w])</span><br><span class="line">&gt;&gt;&gt;sorted([wd for wd in set(text3) if wd.istitle() and len(wd)])</span><br><span class="line">&gt;&gt;&gt;sorted([t for t in set(text2) if &#x27;cie&#x27; in t or &#x27;cei&#x27; in t])</span><br><span class="line">&gt;&gt;&gt;sorted([t for t in set(sent7) if not t.islower()])</span><br></pre></td></tr></table></figure>
+
+<p>条件循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for word in [&#x27;Call&#x27;,&#x27;me&#x27;,&#x27;Ishmael&#x27;,&#x27;.&#x27;]:</span><br><span class="line">     print(word)</span><br><span class="line">for word in tricky:</span><br><span class="line">     print(word,end=&#x27;,&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+<p>1.5自动理解自然语言<br>词义消歧：推算出特定上下文中的词被赋予的意思。<br>指代消解(anaphora resolution)：检测主语和动词的宾语的计算技术。<br>语义角色标注(semantic role labeling):确定名词短语如何与动词相关联。<br>自动生成语言：例如自动问答和机器翻译。<br>文本对齐：给出一个双语文档，自动配对组成句子的过程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Q1: name &#x27;babelize_shell&#x27; is not defined</span><br><span class="line">A1:The issue isn&#x27;t with your code. The problem is that the</span><br><span class="line">babelfish translation service is no longer in operation </span><br><span class="line">so the example code no longer works.</span><br><span class="line">#原始的对话系统</span><br><span class="line">nltk.chat.chatbots()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>简单的语音对话系统的流程架构</p>
+<p>####古登堡语料库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">nltk.corpus.gutenberg.fileids()</span><br><span class="line">emma=nltk.corpus.gutenberg.words(&#x27;austen-emma.txt&#x27;)</span><br><span class="line">#为了简化</span><br><span class="line">from nltk.corpus import gutenberg</span><br><span class="line">gutenberg.fileids()</span><br><span class="line">emma=gutenberg.words(&#x27;austen-emma.txt&#x27;)</span><br><span class="line">for fileid in gutenberg.fileids():</span><br><span class="line">    num_chars=len(gutenberg.raw(fileid))</span><br><span class="line">    num_words=len(gutenberg.words(fileid))</span><br><span class="line">    num_sents=len(gutenberg.sents(fileid))</span><br><span class="line">    num_vocab=len(set([w.lower() for w in gutenberg.words(fileid)]))</span><br><span class="line">    print(int(num_chars/num_words),int(num_words/num_sents),int(num_words/num_vocab))</span><br><span class="line">#sents()函数分割句子</span><br><span class="line">macbeth_sentences=gutenberg.sents(&#x27;shakespeare-macbeth.txt&#x27;)</span><br><span class="line">#访问句子</span><br><span class="line">macbeth_sentences[1037]</span><br><span class="line">#找最长的句子</span><br><span class="line">longest_len=max([len(s) for s in macbeth_sentences])</span><br><span class="line">[s for s in macbeth_sentences if len(s) == longest_len]</span><br><span class="line">#“原始”的文本</span><br><span class="line">len(gutenberg.raw(&#x27;blake-poems.txt&#x27;)</span><br><span class="line">#网络聊天文本</span><br><span class="line">import nltk</span><br><span class="line">from nltk.corpus import webtext</span><br><span class="line">for fileid in webtext.fileids():</span><br><span class="line">    print(fileid,webtext.raw(fileid)[:65],&#x27;...&#x27;)</span><br><span class="line">from nltk.corpus import nps_chat</span><br><span class="line">#2006年10月19日20岁聊天室手机的706个帖子</span><br><span class="line">chatroom=nps_chat.posts(&#x27;10-19-20s_706posts.xml&#x27;)</span><br><span class="line">chatroom[123]</span><br><span class="line">#布朗语料库</span><br><span class="line">from nltk.corpus import brown</span><br><span class="line">#布朗语料库的分类</span><br><span class="line">brown.categories()</span><br><span class="line">#输入对应的File_id，访问对应的文件</span><br><span class="line">brown.words(fileids=[&#x27;cg22&#x27;])</span><br><span class="line">#三个类型的sents</span><br><span class="line">brown.sents(categories=[&#x27;news&#x27;,&#x27;editorial&#x27;,&#x27;reviews&#x27;])</span><br><span class="line">new_text=brown.words(categories=&#x27;news&#x27;)</span><br><span class="line">cfd=nltk.ConditionalFreqDist((genre,word)</span><br><span class="line">    for genre in brown.categories()</span><br><span class="line">    for word in brown.words(categories=genre))</span><br><span class="line">genres=[&#x27;news&#x27;,&#x27;religion&#x27;,&#x27;hobbies&#x27;,&#x27;science_fiction&#x27;,&#x27;romantic&#x27;,&#x27;humor&#x27;]</span><br><span class="line">modals=[&#x27;can&#x27;,&#x27;could&#x27;,&#x27;may&#x27;,&#x27;might&#x27;,&#x27;must&#x27;,&#x27;will&#x27;]</span><br><span class="line">#不同类型文章下的形态动词频率分布图</span><br><span class="line">cfd.tabulate(conditions=genres,samples=modals)</span><br><span class="line">#路透社语料库</span><br><span class="line">from nltk.corpus import reuters</span><br><span class="line">#查看路透社全部主题的文件名</span><br><span class="line">reuters.fileids()</span><br><span class="line">#查看路透社某主题的文件名</span><br><span class="line">reuters.fileids(&#x27;barley&#x27;)</span><br><span class="line">#查看路透社某几个主题的文件名</span><br><span class="line">reuters.fileids([&#x27;barley&#x27;,&#x27;corn&#x27;])</span><br><span class="line">#查看路透社的文章的类别下的文档</span><br><span class="line">reuters.categories()</span><br><span class="line">reuters.categories(&#x27;training/9865&#x27;)</span><br><span class="line">reuters.categories([&#x27;training/9865&#x27;,&#x27;training/9880&#x27;])</span><br><span class="line">#根据类别看文档内容</span><br><span class="line">reuters.words([&#x27;training/9865&#x27;,&#x27;training/9880&#x27;])</span><br><span class="line">reuters.words(categories=[&#x27;barley&#x27;,&#x27;corn&#x27;])</span><br><span class="line">#就职演说语料库</span><br><span class="line">from nltk.corpus import inaugural</span><br><span class="line">inaugural.fileids()</span><br><span class="line"> [fileids[:4] for fileids in inaugural.fileids()]</span><br><span class="line">from nltk.corpus import inaugural</span><br><span class="line">cfd = nltk.ConditionalFreqDist(</span><br><span class="line">      (target, fileid[:4])</span><br><span class="line">                 for fileid in inaugural.fileids()</span><br><span class="line">                 for w in inaugural.words(fileid)</span><br><span class="line">                 for target in [&#x27;america&#x27;, &#x27;citizen&#x27;]</span><br><span class="line">                 if w.lower().startswith(target))</span><br><span class="line">cfd.plot()</span><br></pre></td></tr></table></figure>
+
+
+<p>标注文本语料库<br>许多文本语料库都包含语言学标注，有词性标注、命名实体、句法结构、语义角色等。<br>其他语言的语料库。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">nltk.corpus.cess_esp.words()</span><br><span class="line">nltk.corpus.floresta.words()</span><br><span class="line">nltk.corpus.indian.words()</span><br><span class="line">#超过300种语言的世界人权宣言</span><br><span class="line">nltk.corpus.udhr.fileids()</span><br><span class="line">nltk.corpus.udhr.words(&#x27;Javanese-Latin1&#x27;)[11:]</span><br><span class="line">#查看该文本的字母频率分布图</span><br><span class="line">raw_text=udhr.raw(&#x27;Yoruba-UTF8&#x27;)</span><br><span class="line">nltk.FreqDist(raw_text).plot()</span><br><span class="line">#不同版本的世界人权宣言的累积字长条件频率分布图</span><br><span class="line">from nltk.corpus import udhr</span><br><span class="line">languages = [&quot;Chickasaw&quot;, &quot;English&quot;, &quot;German_Deutsch&quot;]</span><br><span class="line">cfd = nltk.ConditionalFreqDist(</span><br><span class="line">     (lang, len(word))</span><br><span class="line">     for lang in languages</span><br><span class="line">     for word in udhr.words(lang+&quot;-Latin1&quot;))#文件编码是Latin1</span><br><span class="line">cfd.plot(cumulative=True)</span><br></pre></td></tr></table></figure>
+<p>文本语料库的结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">fileids() #语料库中的文件</span><br><span class="line">fileids([categories]) #这些分类对应的语料库中的文件</span><br><span class="line">categories() #语料库中的分类</span><br><span class="line">categories([fileids]) #这些文件对应的语料库中的分类</span><br><span class="line">raw() #语料库的原始内容</span><br><span class="line">raw(fileids=[f1,f2,f3]) #指定文件的原始内容</span><br><span class="line">raw(categories=[c1,c2]) #指定分类的原始内容</span><br><span class="line">words() #整个语料库中的词汇</span><br><span class="line">words(fileids=[f1,f2,f3]) #指定文件中的词汇</span><br><span class="line">words(categories=[c1,c2]) #指定分类中的词汇</span><br><span class="line">sents() #指定分类中的句子</span><br><span class="line">sents(fileids=[f1,f2,f3]) #指定文件中的句子</span><br><span class="line">sents(categories=[c1,c2]) #指定分类中的句子</span><br><span class="line">abspath(fileid) #指定文件在磁盘上的位置</span><br><span class="line">encoding(fileid) #文件的编码（如果知道的话）</span><br><span class="line">open(fileid) #打开指定语料库文件的文件流</span><br><span class="line">root() #到本地安装的语料库根目录的路径</span><br><span class="line"></span><br><span class="line">载入自己的语料库</span><br><span class="line">from nltk.corpus import PlaintextCorpusReader</span><br><span class="line">corpus_root =r&quot;C:\Users\Greenaway\Desktop\text-mining&quot;</span><br><span class="line">wordlists=PlaintextCorpusReader(corpus_root,&#x27;.*&#x27;)</span><br><span class="line">wordlists.fileids()</span><br><span class="line">wordlists.words(&#x27;train.csv&#x27;)</span><br><span class="line"></span><br><span class="line">from nltk.corpus import BracketParseCorpusReader</span><br><span class="line"> file_pattern=r&quot;.*.csv&quot;</span><br><span class="line"> ptb = BracketParseCorpusReader(corpus_root, file_pattern)</span><br><span class="line"> ptb.fileids()</span><br></pre></td></tr></table></figure>
+
+<p>条件频率分布：是频率分布的集合，每个频率分布有一个不同的条件。</p>
+<p>条件和事件：不是处理一个词序列，而是处理一个配对序列<br>按文体计数词汇</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import brown</span><br><span class="line">cfd=nltk.ConditionalFreqDist(</span><br><span class="line">    (genre,word)</span><br><span class="line">    for genre in brown.categories()</span><br><span class="line">    for word in brown.words(categories=genre))</span><br><span class="line">genre_word=[(genre,word)</span><br><span class="line">            for genre in [&#x27;news&#x27;,&#x27;romance&#x27;]</span><br><span class="line">            for word in brown.words(categories=genre)]</span><br><span class="line">len(genre_word)</span><br><span class="line">genre_word[:4]</span><br><span class="line">genre_word[-4]</span><br><span class="line"></span><br><span class="line">cfd=nltk.ConditionalFreqDist(genre_word)</span><br><span class="line">cfd</span><br><span class="line">cfd.conditions()</span><br><span class="line">cfd[&#x27;news&#x27;]</span><br><span class="line">cfd[&#x27;romance&#x27;]</span><br><span class="line">list(cfd[&#x27;romance&#x27;])</span><br><span class="line">cfd[&#x27;romance&#x27;][&#x27;could&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>绘制分布图和分布表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import inaugural</span><br><span class="line">cfd=nltk.ConditionalFreqDist(</span><br><span class="line">    (atrget,fileid[:4])</span><br><span class="line">    for fileid in inaugural.fileids()</span><br><span class="line">    for w in inaugural.words(fileid)</span><br><span class="line">    for target in [&#x27;america&#x27;,&#x27;citizen&#x27;]</span><br><span class="line">    if w.lower().startswith(target)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">from nltk.corpus import udhr</span><br><span class="line">languages=[&#x27;Chickasaw&#x27;,&#x27;English&#x27;]</span><br><span class="line">cfd=nltk.ConditionalFreqDist(</span><br><span class="line">    (lang,len(word))</span><br><span class="line">    for lang in languages</span><br><span class="line">    for word in udhr.words(lang+&#x27;-Latin1&#x27;)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">cfd.tabulate(conditiona=[&#x27;English&#x27;,&#x27;German_Deutsch&#x27;],</span><br><span class="line">samples=range(10),cumulative=True)</span><br></pre></td></tr></table></figure>
+
+<p>使用双连词生成随机文本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">sent=[&#x27;In&#x27;,&#x27;the&#x27;,&#x27;beginning&#x27;,&#x27;God&#x27;,&#x27;created&#x27;,&#x27;the&#x27;,&#x27;heaven&#x27;,&#x27;and&#x27;,&#x27;the&#x27;,&#x27;earth&#x27;,&#x27;.&#x27;]</span><br><span class="line">list(nltk.bigrams(sent))</span><br><span class="line">def generate_model(cfdist,word,num=15):</span><br><span class="line">    for i in range(num):</span><br><span class="line">        print(word)</span><br><span class="line">        word=cfdist[word].max()</span><br><span class="line">text=nltk.corpus.genesis.words(&#x27;english-kjv.txt&#x27;)</span><br><span class="line">bigrams=nltk.bigrams(text)</span><br><span class="line">cfd=nltk.ConditionalFreqDist(bigrams)</span><br><span class="line"></span><br><span class="line">print(cfd[&#x27;living&#x27;])</span><br><span class="line">generate_model(cfd,&#x27;living&#x27;)</span><br><span class="line"></span><br><span class="line">cfdist= ConditionalFreqDist(pairs) 从配对链表中创建条件频率分布</span><br><span class="line">cfdist.conditions() 将条件按字母排序</span><br><span class="line">cfdist[condition] 此条件下的频率分布</span><br><span class="line">cfdist[condition][sample] 此条件下给定样本的频率</span><br><span class="line">cfdist.tabulate() 为条件频率分布制表</span><br><span class="line">cfdist.tabulate(samples, conditions) 指定样本和条件限制下制表</span><br><span class="line">cfdist.plot() 为条件频率分布绘图</span><br><span class="line">cfdist.plot(samples, conditions) 指定样本和条件限制下绘图</span><br><span class="line">cfdist1 &lt; cfdist2 测试样本在cfdist1 中出现次数是否小于在cfdist2 中出现次</span><br><span class="line">数</span><br></pre></td></tr></table></figure>
+<p>代码重用：<br>在一个文件中的变量和函数定义的集合被称为一个Python 模块（module）。相关模块的<br>集合称为一个包（package）。处理布朗语料库的NLTK 代码是一个模块，处理各种不同的语<br>料库的代码的集合是一个包。NLTK 的本身是包的集合，有时被称为一个库（library）。</p>
+<p>词典资源：<br>词汇列表语料库<br>发音词典<br>比较词表<br>Swadesh wordlists</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#导入Swadesh包</span><br><span class="line">from nltk.corpus import swadesh</span><br><span class="line">#查看file id列表</span><br><span class="line">swadesh.fileids()</span><br><span class="line">swadesh.words(&#x27;en&#x27;)</span><br><span class="line">#选择不同语言转换的词典</span><br><span class="line">#entries方法指定一个语言列表来访问多语言中的同源词</span><br><span class="line">fr2en=swadesh.entries([&#x27;fr&#x27;,&#x27;en&#x27;])#法-英</span><br><span class="line">fr2en</span><br><span class="line">#利用dict()函数转换成字典</span><br><span class="line">translate=dict(fr2en)</span><br><span class="line">#因为字典的特性只能 法译英</span><br><span class="line">fr2en[&#x27;nom&#x27;]</span><br><span class="line">fr2en[&#x27;si&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>词汇工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#Toolbox(http://www.sil.org/computing/toolbox/)  Shoebox</span><br><span class="line">#一个Toolbox 文件由一个大量条目的集合组成，其中每个条目由一个或多个字段组成。</span><br><span class="line">#大多数字段都是可选的或重复的</span><br><span class="line"></span><br><span class="line">from nltk.corpus import toolbox</span><br><span class="line">toolbox.entries(&#x27;rotokas.dic&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.5WordNet<br>类似于传统辞典<br>意义与同义词</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#import A as B  :这种方式为给引入的包A定义一个别名B</span><br><span class="line">from nltk.corpus import wordnet as wn </span><br><span class="line">#这样就不用输入wordnet了，定义了别名以后，原名就不能用了</span><br><span class="line">#探索一个词的同义词：</span><br><span class="line">&gt;&gt;&gt;wn.synsets(&#x27;motorcar&#x27;)</span><br><span class="line">[Synset(&#x27;car.n.01&#x27;)]</span><br><span class="line">#(&#x27;car.n.01&#x27;)被称为synset(同义词集)</span><br><span class="line"></span><br><span class="line">Q1:wn.synset(&#x27;car.n.01&#x27;).lemma_names</span><br><span class="line"> 出现了&lt;bound method Synset.lemma_names of Synset(&#x27;car.n.01&#x27;)&gt;</span><br><span class="line">A1:应改为 wn.synset(&#x27;car.n.01&#x27;).lemma_names()</span><br><span class="line"></span><br><span class="line">#查询一个同义词集的定义</span><br><span class="line">wn.synset(&#x27;car.n.01&#x27;).definition()</span><br><span class="line">#查询一个同义词集的例句</span><br><span class="line">wn.synset(&#x27;car.n.01&#x27;).examples()</span><br><span class="line">#查询一个同义词集的所有词意的包（？</span><br><span class="line">wn.synset(&#x27;car.n.01&#x27;).lemmas()</span><br><span class="line">#查看一个同义词集的词集名</span><br><span class="line">wn.lemma(&#x27;car.n.01.automobile&#x27;)</span><br><span class="line">#查看一个同义词集的上级词集名</span><br><span class="line">wn.lemma(&#x27;car.n.01.automobile&#x27;).synset()</span><br><span class="line">#查看一个同义词集的当前级词集名</span><br><span class="line">wn.lemma(&#x27;car.n.01.automobile&#x27;).name()</span><br><span class="line">#查看一个单词的所有释义的同义词集</span><br><span class="line">wn.synsets(&#x27;car&#x27;)</span><br><span class="line">#输出每个释义下的同义词</span><br><span class="line">for synset in wn.synsets(&#x27;car&#x27;):</span><br><span class="line">    print(synset.lemma_names())</span><br><span class="line"></span><br><span class="line">Q2:  轮到你来：写下词dishd 的你能想到的所有意思。现在，在WordNet 的帮助下</span><br><span class="line">使用前面所示的相同的操作探索这个词。wn.synsets(&#x27;dishd&#x27;)输出为空列表</span><br><span class="line">#A2：dishd应该没有收录它的同义词</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Wordnet的层次结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#查看一个词的下位词</span><br><span class="line">motorcar.hyponyms()</span><br><span class="line">#查看一个词的上位词</span><br><span class="line">motorcar.hypernyms()</span><br><span class="line">#WordNet层次路径</span><br><span class="line">paths=motorcar.hypernym_paths()</span><br><span class="line">#查看路径</span><br><span class="line">[synset.name() for synset in paths[0]]</span><br><span class="line">#查看根上位的同义词集</span><br><span class="line">motorcar.root_hypernyms()</span><br><span class="line">#图形化WordNet浏览器</span><br><span class="line">nltk.app.wordnet()</span><br></pre></td></tr></table></figure>
+
+<p>更多的词汇关系<br>上位词和下位词被称为词汇关系。<br>一棵树的部分是它的树干，树冠等；这些都是part_meronyms()。<br>一棵树的实质是包括心材和边材组成的，即substance_meronyms()。<br>树木的集合形成了一个森林，即member_holonyms()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">wn.synset(&#x27;tree.n.01&#x27;).part_meronyms()</span><br><span class="line">wn.synset(&#x27;tree.n.01&#x27;).substance_meronyms()</span><br><span class="line">wn.synset(&#x27;tree.n.01&#x27;).member_holonyms()</span><br><span class="line">#输出一个单词所有同义词集的定义</span><br><span class="line">for synset in wn.synsets(&#x27;mint&#x27;,wn.NOUN):</span><br><span class="line">    print(synset.name()+&#x27;:&#x27;,synset.definition())</span><br><span class="line">#输出一个单词的细致释义</span><br><span class="line">wn.synset(&#x27;eat.v.01&#x27;).entailments()</span><br><span class="line">#输出一个单词的反义词</span><br><span class="line">wn.lemma(&#x27;rush.v.01.rush&#x27;).antonyms()</span><br><span class="line">#查看其他词汇关系的使用方法</span><br><span class="line">dir(wn.synset(&#x27;harmony.n.02&#x27;))</span><br><span class="line">#查看和另一个单词的共同最小上位词</span><br><span class="line">orca=wn.synset(&#x27;orca.n.01&#x27;)</span><br><span class="line">novel=wn.synset(&#x27;novel.n.01&#x27;)</span><br><span class="line">orca.lowest_common_hypernyms(novel)</span><br><span class="line">#查看一个 单词同义词集的深度量化</span><br><span class="line">wn.synset(&#x27;tortoise.n.01&#x27;).min_depth()</span><br><span class="line">#查看一个单词和另一个单词的路径相似度</span><br><span class="line">orca.path_similarity(novel)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第3章加工原料文本<br>3.1 从网络和硬盘访问文本<br>处理html<br>*clean_html等函数已经失效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">from urllib.request import urlopen</span><br><span class="line">url=&#x27;http://novel.tingroom.com/jingdian/3274/89548.html(a page)&#x27;</span><br><span class="line">res=urlopen(url)</span><br><span class="line">html=res.read()</span><br><span class="line">clean=BeautifulSoup(html).get_text()</span><br><span class="line">tokens=nltk.word_tokenize(clean)</span><br><span class="line">tokens</span><br></pre></td></tr></table></figure>
+
+<p>处理搜索引擎的结果<br>处理RSS订阅</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import feedparser</span><br><span class="line">url=&quot;http://feed.cnblogs.com/blog/sitehome/rss&quot;#注意是rss网页</span><br><span class="line">html=urlopen(url)</span><br><span class="line">llog=feedparser.parse(url)</span><br><span class="line">llog[&#x27;feed&#x27;][&#x27;title&#x27;]#博客标题</span><br><span class="line">len(llog.entries)</span><br><span class="line">post.title #标题</span><br><span class="line">content=post.content[0].value#输出目录</span><br><span class="line">token=BeautifulSoup(content[0].value).get_text()#输出清洗后的文字</span><br><span class="line">nltk.word_tokenize(token)</span><br></pre></td></tr></table></figure>
+<p>字符串前有  u代表是 unicode字符</p>
+<p>处理文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f=open(&quot;document.txt&quot;)</span><br><span class="line">f.read()</span><br><span class="line">for line in  f:</span><br><span class="line">    print(line.strip())</span><br><span class="line">#删除输入行结尾的换行符</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import PyPDF2</span><br><span class="line">f=open(&quot;document.pdf&quot;,&#x27;rb&#x27;)</span><br><span class="line">pdfreader=PyPDF2.PdfFileReader(f)</span><br><span class="line">#输出pdf页数</span><br><span class="line">print(pdfreader.numPages)</span><br><span class="line">#查看某一页的pdf</span><br><span class="line">page=pdfreader.getPage(50)</span><br><span class="line"></span><br><span class="line">捕捉用户输入</span><br><span class="line">raw_input()已经在python3中被归入input()了</span><br><span class="line">&gt;&gt;&gt;s=input(&quot;Enter some text: &quot;)</span><br><span class="line">2019-cndjska f dsf</span><br><span class="line">&gt;&gt;&gt;print(&quot;You typed&quot;,nltk.word_tokenize(s),&quot;words.&quot;)</span><br></pre></td></tr></table></figure>
+
+
+<p>3.2字符串的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">s.find(t) 字符串s 中包含t 的第一个索引（没找到返回-1）</span><br><span class="line">s.rfind(t) 字符串s 中包含t 的最后一个索引（没找到返回-1）</span><br><span class="line">s.index(t) 与s.find(t)功能类似，但没找到时引起ValueError</span><br><span class="line">s.rindex(t) 与s.rfind(t)功能类似，但没找到时引起ValueError</span><br><span class="line">s.join(text) 连接字符串s 与text 中的词汇</span><br><span class="line">s.split(t) 在所有找到t 的位置将s 分割成链表（默认为空白符）</span><br><span class="line">s.splitlines() 将s 按行分割成字符串链表</span><br><span class="line">s.lower() 将字符串s 小写</span><br><span class="line">s.upper() 将字符串s 大写</span><br><span class="line">s.titlecase() 将字符串s 首字母大写</span><br><span class="line">s.strip() 返回一个没有首尾空白字符的s 的拷贝</span><br><span class="line">s.replace(t, u) 用u 替换s 中的t</span><br></pre></td></tr></table></figure>
+
+<p>字符串和链表都是一种序列。我们可以通过索引抽取它们中的一部分，可以给它们切片，可以使用连接将它们合并在一起。但是，字符串和链表之间不能连接。字符串是不可变的。</p>
+<p>每个字符分配一个编号，称为编码点。翻译成Unicode 叫做解码。Unicode 转化为其它编码的过程叫做编码。</p>
+<p>3.4使用正则表达式检测词组搭配</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">wordlist=[w for w in nltk.corpus.words.words(&#x27;en&#x27;) if w.islower()]</span><br><span class="line">#re.search(p,s)检查字符串s中是否有模式p</span><br><span class="line">#比如检测单词是否以ed结尾</span><br><span class="line">[w for w in wordlist if re.search(&#x27;ed$&#x27;,w)]</span><br><span class="line"># ^表示一定是这么长的字符,且j是第3个，t是倒数第3个字符</span><br><span class="line">[w for w in wordlist if re.search(&#x27;^..j..t..$&#x27;,w)]</span><br><span class="line">#去掉$,j是第3个，t无所谓</span><br><span class="line">[w for w in wordlist if re.search(&#x27;^..j..t..&#x27;,w)]</span><br><span class="line">#去掉^，t是第3个，j无所谓</span><br><span class="line">[w for w in wordlist if re.search(&#x27;..j..t..$&#x27;,w)]</span><br><span class="line">#去掉^和$只要包含j 和 t就行,两个字母的先后无所谓</span><br><span class="line">[w for w in wordlist if re.search(&#x27;..j..t..&#x27;,w)]</span><br><span class="line">#4个字符分别从四个[]中选择，并且按照[]先后顺序</span><br><span class="line">[w for w in wordlist if re.search(&#x27;^[ghi][mno][jlk][def]$&#x27;,w)]</span><br><span class="line">#在wordlist中 由g到o组成的长短不一的单词</span><br><span class="line">[w for w in wordlist if re.search(&#x27;^[g-o]+$&#x27;,w)]</span><br><span class="line">#在wordlist中 由a-f j-o 中的至少1个字母组成的长短不一的单词</span><br><span class="line">[w for w in wordlist if re.search(&#x27;^[a-gj-o]+$&#x27;)]</span><br><span class="line"></span><br><span class="line">chat_words=sorted(set(w for w in nltk.corpus.nps_chat.word()))</span><br><span class="line">#在chat_words 中 严格包含这四个字母的单词</span><br><span class="line">[w for w in chat_words if re.search(&#x27;^m+i+n+e+$&#x27;,w)]</span><br><span class="line">#在chat_words 中 含有 m i n e中的一个或没有的单词(所有元素)</span><br><span class="line">[w for w in chat_words if re.search(&#x27;^m*i*n*e*$&#x27;,w)]</span><br><span class="line">#在chat_words 中 含有至少h a中的一个字母的单词</span><br><span class="line">[w for w in chat_words if re.search(&#x27;^[ha]+$&#x27;,w)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wsj=sorted(set(nltk.corpus.treebank.words()))</span><br><span class="line">#\. 为转义字符,避免混淆</span><br><span class="line">#逗号左侧和逗号右侧的字符必须由0-9之间的数字组成的所有元素,长度不定</span><br><span class="line">[w for w in wsj if re.search(&#x27;^[0-9]+\.[0-9]+$&#x27;,w)]</span><br><span class="line">#在wsj中由A-Z且后缀为$的所有元素</span><br><span class="line">[w for w in wsj if re.search(&#x27;^[A-Z]+\$$&#x27;,w)]</span><br><span class="line">#在wsj中仅仅由0-9之间的数字组成且长度严格为4的元素</span><br><span class="line">[w for w in wsj if re.search(&#x27;^[0-9]&#123;4&#125;$&#x27;,w)]</span><br><span class="line">#在wsj中被-分割的 前半部分由0-9长度不定的字符串,</span><br><span class="line">#后半部分由长度在3-5之间的a-z组成的单词的所有元素</span><br><span class="line">[w for w in wsj if re.search(&#x27;^[0-9]+-[a-z]&#123;3,5&#125;&#x27;,w)]</span><br><span class="line">#被-分割成三部分的长度分别 ≥5, 2或3,≤6 的字母串的所有元素</span><br><span class="line">[w for w in wsj if re.search(&#x27;^[a-z]&#123;5,&#125;-[a-z]&#123;2,3&#125;-[a-z]&#123;,6&#125;$&#x27;,w)]</span><br><span class="line">#ing或ed结尾的单词</span><br><span class="line">[w for w in wsj if re.search(&#x27;(ed|ing)&#x27;,w)]</span><br></pre></td></tr></table></figure>
+
+<p>3.5正则表达式的有益应用<br>运算符“^”当它出现在方括号内的第一个字符位置时有另外的功能。例如：[^aeiouAEIOU]匹配除元音字母之外的所有字母。<br>提取字符块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">word=&#x27;supercalifragilisticexpialidocious&#x27;</span><br><span class="line">re.findall(r&#x27;[aeiou]&#x27;,word)</span><br><span class="line">fd=nltk.FreqDist(vs for word in wsj)</span><br><span class="line">        for vs in findall(r&#x27;[aeiou]&#123;2,&#125;&#x27;,word)</span><br><span class="line">fd.items()</span><br><span class="line"></span><br><span class="line">#将2009-12-31转化成2009.12.31</span><br><span class="line">[int(n) for n in re.findall(r&#x27;[0-9]+&#x27;,&#x27;2009-12-31&#x27;)]</span><br><span class="line">#消除前几个元音字母</span><br><span class="line">regexp=r&#x27;^[AEIOUaeiou]+|[AEIOUaeiou]+$|[^AEIOUaeiou]&#x27;</span><br><span class="line">#</span><br><span class="line">def compress(word):</span><br><span class="line">    pieces=re.findall(regexp,word)</span><br><span class="line">    return &#x27;&#x27;.join(pieces)</span><br><span class="line">english_udhr=nltk.corpus.udhr.words(&#x27;English-Latin1&#x27;)</span><br><span class="line">print(nltk.tokenwrap(compress(w) for w in english_udhr[:75]))</span><br><span class="line"></span><br><span class="line">#查看正则匹配的地方 例如</span><br><span class="line">nltk.re_show(&#x27;ed$&#x27;,&#x27;happened&#x27;)</span><br><span class="line">#正则表达式的demo</span><br><span class="line">nltk.app.nemo()</span><br></pre></td></tr></table></figure>
+
+
+<p>查找词干</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#低级原始的处理词干的方法,不能直接用pycharm的Terminal运行,改用IDLE</span><br><span class="line">def stem(word):</span><br><span class="line">	for suffix in [&#x27;ing&#x27;,&#x27;ly&#x27;,&#x27;ed&#x27;,&#x27;ious&#x27;,&#x27;ies&#x27;,&#x27;ive&#x27;,&#x27;es&#x27;,&#x27;s&#x27;,&#x27;ment&#x27;]:</span><br><span class="line">		if word.endswith(suffix):</span><br><span class="line">			return word[:-len(suffix)]</span><br><span class="line">	return word#输出删掉后缀的词干</span><br><span class="line">#将上面的函数可以直接用正则表达式改写成另外一句,得到检测出来的后缀</span><br><span class="line">re.findall(r&#x27;^.*(ing|ly|ed|ious|ies|ive|es|s|ment)$&#x27;,&#x27;processing&#x27;)</span><br><span class="line">#将上面的正则表达式改为不想选择要输出的字符串</span><br><span class="line">re.findall(r&#x27;^.*(?:ing|ly|ed|ious|ies|ive|es|s|ment)$)&#x27;,&#x27;processing&#x27;)</span><br><span class="line">#将单词分为词干和后缀,但是正则表达式的&quot;.*&quot;部分会尽可能多的匹配输入的字符串</span><br><span class="line">re.findall(r&#x27;^(.*)(ing|ly|ed|ious|ies|ive|es|s|ment)$&#x27;,&#x27;processing&#x27;)</span><br><span class="line">#在*后加上?使得正则表达式不会尽可能多的匹配输入的字符串</span><br><span class="line">re.finall(r&#x27;^(.*?)(ing|ly|ed|ious|ies|ive|es|s|ment)$&#x27;,&#x27;processing&#x27;)</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">尖括号用于标记标识符的边界，尖括号之间的所有空白都被忽略（这只对NLTK 中的findall()方法处理文本有效）</span><br><span class="line">&lt;.*&gt;，它将匹配所有单个标识符</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>from nltk.corpus import gutenberg,nps_chat<br>moby&#x3D;nltk.Text(gutenberg.words(‘melville-moby_dick.txt’))<br>#输出中间的词<br>moby.findall(r”<a>(&lt;.*&gt;)<man>“)<br>#输出 x x bro<br>chat&#x3D;nltk.Text(nps_chat.words())<br>chat.findall(r”&lt;.*&gt;&lt;.*&gt;<bro>“)<br>#输出as x as y<br>chat.findall(r”<as>&lt;.*&gt;<as>&lt;.*&gt;”)<br>输出长度≥3的所有单词由l开头的短语<br>chat.findall(r”&lt;l.*&gt;{3,}”)<br>#输出x and other y的短语,可以从中找出x的上位词是y<br>from nltk.corpus import brown<br>hobby&#x3D;nltk.Text(brown.words(categories&#x3D;[‘hoobies’,’learned’]))<br>hobby.findall(r”&lt;\w*&gt;<and><other>&lt;\w*s&gt;”)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.6词形规范化</span><br><span class="line">WordNet 词形归并器删除词缀产生的词都是在它的字典中的词。这个额外的检查过程使</span><br><span class="line">词形归并器比刚才提到的词干提取器要慢。请注意，它并没有处理“lying”，但它将“wom</span><br><span class="line">en”转换为“woman”。</span><br><span class="line">另一个规范化任务涉及识别非标准词，包括数字、缩写、日期以及任何此</span><br><span class="line">类标识符到一个特殊的词汇的映射。</span><br><span class="line">词干提取器</span><br></pre></td></tr></table></figure>
+<p>raw &#x3D; “””DENNIS: Listen, strange women lying in ponds distributing<br>   swords is no basis for a system of government. Supreme executive powe<br>   r derives from a mandate from the masses, not from some farcical aquat<br>    ic ceremony.”””<br>tokens&#x3D;nltk.word_tokenize(raw)<br>[porter.stem(t) for t in tokens]<br>[lancaster.stem(t) for t in tokens]</p>
+<p>Porter词干提取器<br>class IndexedText(object):<br>def <strong>init</strong>(self, stemmer, text):<br>    self._text &#x3D; text<br>    self._stemmer &#x3D; stemmer<br>    self._index &#x3D; nltk.Index((self._stem(word), i)<br>            for (i, word) in enumerate(text))<br>def concordance(self, word, width&#x3D;40):<br>    key &#x3D; self._stem(word)<br>    wc &#x3D; width&#x2F;4 # words of context<br>    for i in self._index[key]:<br>        lcontext &#x3D; ‘ ‘.join(self._text[i-wc:i])<br>        rcontext &#x3D; ‘ ‘.join(self._text[i:i+wc])<br>        ldisplay &#x3D; ‘%*s’ % (width, lcontext[-width:])<br>        rdisplay &#x3D; ‘%-*s’ % (width, rcontext[:width])<br>        print ldisplay, rdisplay<br>def _stem(self, word):<br>    return self._stemmer.stem(word).lower()</p>
+<p>porter&#x3D;nltk.PorterStemmer()<br>grail&#x3D;nltk.corpus.webtext.words(‘grail.txt’)<br>text&#x3D;IndexedText(porter,grail)</p>
+<p>wnl&#x3D;nltk.WordNetLemmatizer()<br>[wnl.lemmatizer(t) for t in tokens]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">3.7 用正则表达式为文本分词</span><br><span class="line">re 库内置的缩写“\s”，它表示匹配所有空白字符。</span><br><span class="line">“\S”是“\s”的补</span><br><span class="line">用Python 提供给我们的字符类“\w”匹配词中的字符，相当于[a-zA-Z0-9_]。</span><br><span class="line">也定义了这个类的补“\W”即所有字母、数字和下划线以外的字符。</span><br><span class="line">\b 词边界（零宽度）</span><br><span class="line">\d 任一十进制数字（相当于[0-9]）</span><br><span class="line">\D 任何非数字字符（等价于$\[^0-9]$）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>re.split(r’[ \t\n]+’,raw)<br>re.split(r’\s+’,raw)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">正则表达式分词器</span><br></pre></td></tr></table></figure>
+<p>text &#x3D; ‘That U.S.A. poster-print costs $12.40…’<br>pattern&#x3D;r’\S+’#自定义的正则表达式<br>nltk.regexp_tokenize(text,pattern)</p>
+<pre><code>
+(弃坑)
+</code></pre>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://m1luf0.github.io/2020/01/10/NLPwithpython/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&text=NLP with Python"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&is_video=false&description=NLP with Python"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NLP with Python&body=Check out this article: https://m1luf0.github.io/2020/01/10/NLPwithpython/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&title=NLP with Python"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://m1luf0.github.io/2020/01/10/NLPwithpython/&name=NLP with Python&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://m1luf0.github.io/2020/01/10/NLPwithpython/&t=NLP with Python"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2024
+    m1luf0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/m1luf0">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
